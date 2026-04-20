@@ -165,11 +165,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scene_manager\scene\scene.cpp" />
+    <ClCompile Include="src\scene_manager\scene\title\title.cpp" />
+    <ClCompile Include="src\scene_manager\scene_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vivid2d\vivid2d.vcxproj">
       <Project>{f852ae89-c481-4e06-b523-26516b7a128c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\scene_manager\scene\scene.h" />
+    <ClInclude Include="src\scene_manager\scene\scene_id.h" />
+    <ClInclude Include="src\scene_manager\scene\title\title.h" />
+    <ClInclude Include="src\scene_manager\scene_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

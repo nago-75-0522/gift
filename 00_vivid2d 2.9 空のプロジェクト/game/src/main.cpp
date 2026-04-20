@@ -11,6 +11,7 @@
  */
 
 #include "vivid.h"
+#include"scene_manager/scene_manager.h"
 
 /*!
  *  @brief      描画関数
@@ -18,6 +19,9 @@
 void
 Display(void)
 {
+    CSceneManager::GetInstance().Update();//アップデートの呼び出し
+    CSceneManager::GetInstance().Draw();//描画の呼び出し
+
 }
 
 /*!
