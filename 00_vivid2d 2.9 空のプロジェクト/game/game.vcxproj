@@ -167,6 +167,10 @@
     <ClCompile Include="src\game\game.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\gamemain.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\stage\stage.cpp" />
+    <ClCompile Include="src\game\object\character\character.cpp" />
+    <ClCompile Include="src\game\object\character\protagonist\protagonist.cpp" />
+    <ClCompile Include="src\game\object\character\soldier\soldier.cpp" />
+    <ClCompile Include="src\game\object\map\map.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\scene.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\title\title.cpp" />
@@ -182,6 +186,10 @@
     <ClInclude Include="src\game\scene_manager\scene\gamemain\gamemain.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage_id.h" />
+    <ClInclude Include="src\game\object\character\character.h" />
+    <ClInclude Include="src\game\object\character\protagonist\protagonist.h" />
+    <ClInclude Include="src\game\object\character\soldier\soldier.h" />
+    <ClInclude Include="src\game\object\map\map.h" />
     <ClInclude Include="src\game\scene_manager\scene\scene.h" />
     <ClInclude Include="src\game\scene_manager\scene\scene_id.h" />
     <ClInclude Include="src\game\scene_manager\scene\title\title.h" />
