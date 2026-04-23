@@ -14,7 +14,7 @@ void CSceneManager::Initialize()
 	{
 	case SCENE_ID::TITLE:
 		break;
-	case SCENE_ID::STORY:
+	case SCENE_ID::GAMEMAIN:
 		break;
 		/*
 	case SCENE_ID::STAGE1:
@@ -40,7 +40,7 @@ void CSceneManager::Update()
 	{
 	case SCENE_ID::TITLE:
 		break;
-	case SCENE_ID::STORY:
+	case SCENE_ID::GAMEMAIN:
 		break;
 		/*
 	case SCENE_ID::STAGE1:
@@ -69,24 +69,13 @@ void CSceneManager::Draw()
 	
 		CTitle::GetInstance().Draw();
 		vivid::DrawText(40, "たいとる", vivid::Vector2::ZERO);
+		break;
+	case SCENE_ID::GAMEMAIN:
+		//初めから　続きから＝続きからだったらセーブデータのシーン
+		//初めからだったらすとーりー1にとぶ
+		break;
 
 
-		break;
-	case SCENE_ID::STORY:
-
-		break;
-		/*
-	case SCENE_ID::STAGE1:
-		break;
-	case SCENE_ID::STAGE2:
-		break;
-	case SCENE_ID::STAGE3:
-		break;
-	case SCENE_ID::STAGE4:
-		break;
-	case SCENE_ID::ENDING:
-		break;
-		*/
 	default:
 		break;
 	}
@@ -103,11 +92,11 @@ void CSceneManager::Finalize()
 #ifndef DEBUG
 		if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::Z))
 		{
-			Change(SCENE_ID::STORY);
+			Change(SCENE_ID::GAMEMAIN);
 		}
 #endif // !_DEBUG
 		break;
-	case SCENE_ID::STORY:
+	case SCENE_ID::GAMEMAIN:
 		break;
 
 		/*
