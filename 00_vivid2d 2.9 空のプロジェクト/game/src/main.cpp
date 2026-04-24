@@ -11,7 +11,9 @@
  */
 
 #include "vivid.h"
-#include"game/scene_manager/scene_manager.h"
+#include "game/game.h"
+
+CGame game;
 
 /*!
  *  @brief      描画関数
@@ -19,9 +21,9 @@
 void
 Display(void)
 {
-    CSceneManager::GetInstance().Update();//アップデートの呼び出し
-    CSceneManager::GetInstance().Draw();//描画の呼び出し
+    game.Update();
 
+    game.Draw();
 }
 
 /*!
@@ -44,11 +46,15 @@ WinMain( _In_ HINSTANCE hInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPSTR lpCmdLin
     // vividライブラリ初期化
     vivid::Initialize( hInst );
 
+    game.Initialize();
+
     // 更新/描画関数登録
     vivid::DisplayFunction( Display );
 
     // ゲームループ
     vivid::MainLoop( );
+
+    game.Finalize();
 
     // vividライブラリ解放
     vivid::Finalize( );
