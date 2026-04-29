@@ -13,6 +13,7 @@ void CSceneManager::Initialize()
 	switch (m_CurrentID)
 	{
 	case SCENE_ID::TITLE:
+		
 		break;
 	case SCENE_ID::GAMEMAIN:
 		break;
@@ -39,6 +40,7 @@ void CSceneManager::Update()
 	switch (m_CurrentID)
 	{
 	case SCENE_ID::TITLE:
+		
 		break;
 	case SCENE_ID::GAMEMAIN:
 		break;
