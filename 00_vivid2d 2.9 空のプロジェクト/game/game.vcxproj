@@ -165,6 +165,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\game\game.cpp" />
+    <ClCompile Include="src\game\object\character\character.cpp" />
+    <ClCompile Include="src\game\object\character\protagonist\protagonist.cpp" />
+    <ClCompile Include="src\game\object\character\soldier\soldier.cpp" />
+    <ClCompile Include="src\game\object\item\battery\battery.cpp" />
+    <ClCompile Include="src\game\object\item\battery\farst_peace\farst_peace.cpp" />
+    <ClCompile Include="src\game\object\item\battery\forth_peace\forth_peace.cpp" />
+    <ClCompile Include="src\game\object\item\battery\second_peace\second_peace.cpp" />
+    <ClCompile Include="src\game\object\item\battery\third_peace\third_peace.cpp" />
+    <ClCompile Include="src\game\object\item\key_item\cyan_shell\cyan_shell.cpp" />
+    <ClCompile Include="src\game\object\item\key_item\magenta_flower\magenta_flower.cpp" />
+    <ClCompile Include="src\game\object\item\key_item\white_necklace\white_neklece.cpp" />
+    <ClCompile Include="src\game\object\item\key_item\yellow_nuts\yellow_nuts.cpp" />
+    <ClCompile Include="src\game\object\item\normal_item\flower\flower.cpp" />
+    <ClCompile Include="src\game\object\item\normal_item\shell\shell.cpp" />
+    <ClCompile Include="src\game\object\map\castle\castle.cpp" />
+    <ClCompile Include="src\game\object\map\forest\forest.cpp" />
+    <ClCompile Include="src\game\object\map\garden\garden.cpp" />
+    <ClCompile Include="src\game\object\map\home\home.cpp" />
+    <ClCompile Include="src\game\object\map\map.cpp" />
+    <ClCompile Include="src\game\object\map\sea\sea.cpp" />
+    <ClCompile Include="src\game\object\map\town\town.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\gamemain.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\stage\stage.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\story\story.cpp" />
@@ -180,6 +201,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\game.h" />
+    <ClInclude Include="src\game\object\character\character.h" />
+    <ClInclude Include="src\game\object\character\protagonist\protagonist.h" />
+    <ClInclude Include="src\game\object\character\soldier\soldier.h" />
+    <ClInclude Include="src\game\object\item\battery\battery.h" />
+    <ClInclude Include="src\game\object\item\battery\farst_peace\farst_peace.h" />
+    <ClInclude Include="src\game\object\item\battery\forth_peace\forth_peace.h" />
+    <ClInclude Include="src\game\object\item\battery\second_peace\second_peace.h" />
+    <ClInclude Include="src\game\object\item\battery\third_peace\third_peace.h" />
+    <ClInclude Include="src\game\object\item\key_item\cyan_shell\cyan_shell.h" />
+    <ClInclude Include="src\game\object\item\key_item\magenta_flower\magenta_flower.h" />
+    <ClInclude Include="src\game\object\item\key_item\white_necklace\white_necklece.h" />
+    <ClInclude Include="src\game\object\item\key_item\yellow_nuts\yellow_nuts.h" />
+    <ClInclude Include="src\game\object\item\normal_item\flower\flower.h" />
+    <ClInclude Include="src\game\object\item\normal_item\shell\shell.h" />
+    <ClInclude Include="src\game\object\map\castle\castle.h" />
+    <ClInclude Include="src\game\object\map\forest\forest.h" />
+    <ClInclude Include="src\game\object\map\garden\garden.h" />
+    <ClInclude Include="src\game\object\map\home\home.h" />
+    <ClInclude Include="src\game\object\map\map.h" />
+    <ClInclude Include="src\game\object\map\sea\sea.h" />
+    <ClInclude Include="src\game\object\map\town\town.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\gamemain.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage_id.h" />
