@@ -186,6 +186,7 @@
     <ClCompile Include="src\game\object\map\map.cpp" />
     <ClCompile Include="src\game\object\map\sea\sea.cpp" />
     <ClCompile Include="src\game\object\map\town\town.cpp" />
+    <ClCompile Include="src\game\object\timer\timer.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\gamemain.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\stage\stage.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\story\story.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="src\game\object\map\map.h" />
     <ClInclude Include="src\game\object\map\sea\sea.h" />
     <ClInclude Include="src\game\object\map\town\town.h" />
+    <ClInclude Include="src\game\object\timer\timer.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\gamemain.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage_id.h" />
