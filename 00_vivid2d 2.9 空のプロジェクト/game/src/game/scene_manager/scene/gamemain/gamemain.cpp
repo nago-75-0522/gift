@@ -1,5 +1,5 @@
 #include"gamemain.h"
-
+#include"vivid.h"
 
 //はじめからか続きからを選択
 //初めからの場合はプロローグ　続きからならセーブしているステージからスタート
@@ -20,7 +20,7 @@ void CGamemain::Update(void)
 //描画
 void CGamemain::Draw(void)
 {
-
+	vivid::DrawText(48, "gamemain", { 0,0 });
 
 }
 

@@ -1,5 +1,8 @@
 #pragma once
 #include"scene/scene_id.h"
+#include"scene\scene.h"
+#include"scene/gamemain/gamemain.h"
+#include"scene/title/title.h"
 
 class CSceneManager
 {
