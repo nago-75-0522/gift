@@ -22,7 +22,6 @@ void
 Display(void)
 {
     game.Update();
-
     game.Draw();
 }
 

@@ -1,13 +1,10 @@
 #pragma once
-#include"vivid.h"
 #include"..\scene.h"
+#include"..\..\scene_manager.h"
 
 class CTitle :public IScene
 {
 	public:
-
-		static CTitle& GetInstance();//インスタンス取得
-
 		//初期化
 		void Initialize(void)override;//多重定義
 		//更新
@@ -18,15 +15,10 @@ class CTitle :public IScene
 		void Finalize(void)override;
 
 
-
-	private:
-
 	CTitle(void) = default;//コンストラクタ
 	~CTitle(void) = default;//デストラクタ
 
-	//どこからでも呼び出せるようにする
-	CTitle(const CTitle& rhs) = delete;//コピーの禁止
-	CTitle& operator =(const CTitle& rhs) = delete;//代入の禁止
-
+	
+private:
 
 };

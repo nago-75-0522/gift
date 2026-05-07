@@ -3,7 +3,7 @@
 
 void CGame::Initialize(void)
 {
-	CSceneManager::GetInstance().Initialize();
+	CSceneManager::GetInstance().Initialize();//初期化の呼び出し
 }
 
 void CGame::Update(void)
@@ -18,5 +18,5 @@ void CGame::Draw(void)
 
 void CGame::Finalize(void)
 {
-	CSceneManager::GetInstance().Finalize();
+	CSceneManager::GetInstance().Finalize();//解放の呼び出し
 }
