@@ -10,6 +10,6 @@ public:
 
 	void Draw(void);
 private:
-	static const vivid::Vector2 position;
+	static const vivid::Vector2 m_position;
 };
 
