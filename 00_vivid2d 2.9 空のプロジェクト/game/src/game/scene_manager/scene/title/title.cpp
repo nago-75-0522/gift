@@ -1,14 +1,5 @@
 #include"title.h"
-#include"vivid.h"
-#include"..\..\scene_manager.h"
 #include"../../../object/timer/timer.h"
-CTitle& CTitle::GetInstance()
-{
-	static CTitle instance;//CSceneManager型のインスタンスの作成
-	return instance;//インスタンスを返す
-
-}
-
 
 //初期化
 void CTitle::Initialize(void)
@@ -35,3 +26,4 @@ void CTitle::Finalize(void)
 {
 	
 }
+

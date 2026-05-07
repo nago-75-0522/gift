@@ -26,6 +26,8 @@ public:
 
 	void _ChangeScene();
 
+
+
 private:
 
 	//コンストラクタ

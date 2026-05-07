@@ -1,7 +1,5 @@
 #pragma once
 #include"..\scene.h"
-#include"..\..\scene_manager.h"
-#include"vivid.h"
 
 class CGamemain :public IScene
 {
@@ -15,6 +13,7 @@ public:
 	void Draw(void)override;
 	//解放
 	void Finalize(void)override;
+
 
 
 	CGamemain(void) = default;//コンストラクタ
