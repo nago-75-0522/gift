@@ -1,61 +1,121 @@
 #include "scene_manager.h"
 #include"scene/scene_id.h"
 #include"..\scene_manager\scene\title\title.h"
-#include"..\scene_manager\scene\gamemain\gamemain.h"
-#include"scene/scene.h"
 
-
-CSceneManager::CSceneManager()
-	:m_Scene(nullptr)
+CSceneManager& CSceneManager::GetInstance()
 {
-}
-
-
-CSceneManager& CSceneManager::GetInstance(void)
-{
-	static CSceneManager instance;
-	return instance;
+	static CSceneManager instance;//CSceneManager型のインスタンスの作成
+	return instance;//インスタンスを返す
 }
 
 void CSceneManager::Initialize()
 {
-	//初期化
-	_ChangeScene();
-	if (m_Scene)
+	switch (m_CurrentID)
 	{
-		m_Scene->Initialize();
-		m_CurrentID = m_NextID;
+	case SCENE_ID::TITLE:
+		CTitle::GetInstance().Initialize();
+		break;
+	case SCENE_ID::GAMEMAIN:
+		break;
+		/*
+	case SCENE_ID::STAGE1:
+		break;
+	case SCENE_ID::STAGE2:
+		break;
+	case SCENE_ID::STAGE3:
+		break;
+	case SCENE_ID::STAGE4:
+		break;
+	case SCENE_ID::ENDING:
+		break;
+		*/
+	default:
+		break;
 	}
 }
 
 void CSceneManager::Update()
 {
 
-	if (m_CurrentID != m_NextID)
+	switch (m_CurrentID)
 	{
-		_ChangeScene();
-		if (m_Scene)
-			m_Scene->Initialize();;//m_Sceneをアップデートすることで親クラスで繋がってほかが全部初期化がはいる
-
+	case SCENE_ID::TITLE:
+		CTitle::GetInstance().Update();
+		break;
+	case SCENE_ID::GAMEMAIN:
+		break;
+		/*
+	case SCENE_ID::STAGE1:
+		break;
+	case SCENE_ID::STAGE2:
+		break;
+	case SCENE_ID::STAGE3:
+		break;
+	case SCENE_ID::STAGE4:
+		break;
+	case SCENE_ID::ENDING:
+		break;
+		*/
+	default:
+		break;
 	}
 
-	if (!m_Scene)
-		return;
-
-	m_Scene->Update();//m_Sceneをアップデートすることで親クラスで繋がってほかが全部アップデートはいる
 }
 
 void CSceneManager::Draw()
 {
 
-	if(m_Scene)
-	m_Scene->Draw();//描画呼び出し
+	switch (m_CurrentID)
+	{
+	case SCENE_ID::TITLE:
+	
+		CTitle::GetInstance().Draw();
+		vivid::DrawText(40, "たいとる", vivid::Vector2::ZERO);
+		break;
+	case SCENE_ID::GAMEMAIN:
+		//初めから　続きから＝続きからだったらセーブデータのシーン
+		//初めからだったらすとーりー1にとぶ
+		break;
+
+
+	default:
+		break;
+	}
 
 }
 
 void CSceneManager::Finalize()
 {
 
+	switch (m_CurrentID)
+	{
+	case SCENE_ID::TITLE:
+		CTitle::GetInstance().Update();
+#ifndef DEBUG
+		if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::Z))
+		{
+			Change(SCENE_ID::GAMEMAIN);
+		}
+#endif // !_DEBUG
+		break;
+	case SCENE_ID::GAMEMAIN:
+		break;
+
+		/*
+	case SCENE_ID::STAGE1:
+		break;
+	case SCENE_ID::STAGE2:
+		break;
+	case SCENE_ID::STAGE3:
+		break;
+	case SCENE_ID::STAGE4:
+		break;
+	case SCENE_ID::ENDING:
+		break;
+		*/
+	default:
+		break;
+	}
 
 }
 
@@ -70,29 +130,4 @@ void CSceneManager::Change(SCENE_ID id)
 	//切り替え先のシーンを初期化
 	CSceneManager::Initialize();
 
-}
-
-void CSceneManager::_ChangeScene()
-{
-	if (m_Scene)
-		m_Scene->Finalize();
-
-	//初期化する処理
-	delete m_Scene;
-	m_Scene = nullptr;
-
-	//新しいシーンの初期化
-	switch (m_NextID)
-	{
-	case SCENE_ID::TITLE:
-		m_Scene = new CTitle();
-		break;
-	case SCENE_ID::GAMEMAIN:
-		m_Scene = new CGamemain();
-		break;
-	//case SCENE_ID::SAVE:
-		//break;
-	default:
-		break;
-	}
 }
