@@ -1,6 +1,6 @@
 #pragma once
 #include"..\scene.h"
-#include"..\..\scene_manager.h"
+
 
 class CTitle :public IScene
 {
