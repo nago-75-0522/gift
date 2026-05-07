@@ -1,6 +1,6 @@
 #include"timer.h"
 
-const int CTimer::m_play_time = 10 * 60;
+const int CTimer::m_play_time = 180 * 60;
 const float CTimer::a = 1 / m_play_time;
 
 CTimer::CTimer()

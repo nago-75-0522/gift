@@ -1,18 +1,18 @@
 #pragma once
 /* 主人公 */
-#include"../character.h"
 
-class CProtagonist :public CCharacter
+
+class CProtagonist 
 {
 public:
 	CProtagonist(void);
 	~CProtagonist(void);
 
-	void Initialize(void) override;
+	void Initialize(void);
 
-	void Update(void) override;
+	void Update(void);
 
-	void Draw(void) override;
+	void Draw(void);
 
-	void Finalize(void) override;
+	void Finalize(void);
 };

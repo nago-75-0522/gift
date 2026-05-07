@@ -13,7 +13,7 @@ void CSceneManager::Initialize()
 	switch (m_CurrentID)
 	{
 	case SCENE_ID::TITLE:
-		
+		CTitle::GetInstance().Initialize();
 		break;
 	case SCENE_ID::GAMEMAIN:
 		break;
@@ -40,7 +40,7 @@ void CSceneManager::Update()
 	switch (m_CurrentID)
 	{
 	case SCENE_ID::TITLE:
-		
+		CTitle::GetInstance().Update();
 		break;
 	case SCENE_ID::GAMEMAIN:
 		break;

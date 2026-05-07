@@ -4,11 +4,11 @@
 class CTimer
 {
 public: 
-	CTimer();
-	~CTimer() = default;
-	void Initialize();
-	void Update();
-	void Draw();
+	CTimer(void);
+	~CTimer(void) = default;
+	void Initialize(void);
+	void Update(void);
+	void Draw(void);
 
 	
 	static CTimer& GetInstanse(void);
