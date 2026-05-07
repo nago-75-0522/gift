@@ -169,7 +169,7 @@
     <ClCompile Include="src\game\object\character\protagonist\protagonist.cpp" />
     <ClCompile Include="src\game\object\character\soldier\soldier.cpp" />
     <ClCompile Include="src\game\object\item\battery\battery.cpp" />
-    <ClCompile Include="src\game\object\item\battery\farst_peace\farst_peace.cpp" />
+    <ClCompile Include="src\game\object\item\battery\farst_peace\first_peace.cpp" />
     <ClCompile Include="src\game\object\item\battery\forth_peace\forth_peace.cpp" />
     <ClCompile Include="src\game\object\item\battery\second_peace\second_peace.cpp" />
     <ClCompile Include="src\game\object\item\battery\third_peace\third_peace.cpp" />
@@ -206,7 +206,7 @@
     <ClInclude Include="src\game\object\character\protagonist\protagonist.h" />
     <ClInclude Include="src\game\object\character\soldier\soldier.h" />
     <ClInclude Include="src\game\object\item\battery\battery.h" />
-    <ClInclude Include="src\game\object\item\battery\farst_peace\farst_peace.h" />
+    <ClInclude Include="src\game\object\item\battery\farst_peace\first_peace.h" />
     <ClInclude Include="src\game\object\item\battery\forth_peace\forth_peace.h" />
     <ClInclude Include="src\game\object\item\battery\second_peace\second_peace.h" />
     <ClInclude Include="src\game\object\item\battery\third_peace\third_peace.h" />
