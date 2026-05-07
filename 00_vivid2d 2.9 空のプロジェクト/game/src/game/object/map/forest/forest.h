@@ -1,4 +1,5 @@
 #pragma once
+#include"vivid.h"
 class CForest
 {
 public:
@@ -8,5 +9,19 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	
 private:
+	enum class MAP_CHIP_ID
+	{
+		EMPTY,
+		TREE,
+        START_FLAG,
+		GOAL_FLAG
+	};
+	//定数
+	static const int m_map_chip_size;
+	static const int m_map_chip_count_width ;
+	static const int m_map_chip_count_height ;
+	
+	
 };
