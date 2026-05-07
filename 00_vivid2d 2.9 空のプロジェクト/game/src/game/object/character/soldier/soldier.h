@@ -6,7 +6,7 @@ class CSoldier :public CCharacter
 {
 public:
 	CSoldier(void);
-	~CSoldier(void);
+	~CSoldier(void) = default;
 
 	void Initialize(void) override;
 

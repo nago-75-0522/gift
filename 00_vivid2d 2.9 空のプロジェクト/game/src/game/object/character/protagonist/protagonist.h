@@ -6,7 +6,7 @@ class CProtagonist
 {
 public:
 	CProtagonist(void);
-	~CProtagonist(void);
+	~CProtagonist(void) = default;
 
 	void Initialize(void);
 
