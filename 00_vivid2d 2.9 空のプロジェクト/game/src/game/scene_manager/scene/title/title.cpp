@@ -2,17 +2,20 @@
 #include"../../../object/timer/timer.h"
 #include"vivid.h"
 #include"..\..\scene_manager.h"
+#include"../../../object/map/forest/forest.h"
 
-
+CForest forest;
 //èâä˙âª
 void CTitle::Initialize(void)
 {
+	forest.Initialize();
 	CTimer::GetInstanse().Initialize();
 }
 
 //çXêV
 void CTitle::Update(void)
 {
+	
 	CTimer::GetInstanse().Update();
 	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::Z))
 	{
@@ -27,6 +30,7 @@ void CTitle::Update(void)
 //ï`âÊ
 void CTitle::Draw(void)
 {
+	forest.Draw();
 	CTimer::GetInstanse().Draw();
 	vivid::DrawText(48, "title", {0,0});
 	
