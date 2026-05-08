@@ -98,6 +98,31 @@ void CForest::Draw(void)
 	}
 }
 
+vivid::Vector2 CForest::GetStartPos(void)
+{
+	for (int i = 0; i < m_map_chip_count_height; ++i)
+	{
+		for (int k = 0; k < m_map_chip_count_width; ++k)
+		{
+			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::START_FLAG)
+			{
+				return {
+					(float)(k * m_map_chip_size),
+					(float)(i * m_map_chip_size)
+				};
+			}
+		}
+	}
+}
+
+int CForest::GetMapChipSize(void)
+{
+	return m_map_chip_size;
+}
+
+
+
+
 bool CForest::CheckWall(int x, int y)
 {
 	if (x < 0)
