@@ -180,9 +180,11 @@
     <ClCompile Include="src\game\object\item\normal_item\flower\flower.cpp" />
     <ClCompile Include="src\game\object\item\normal_item\shell\shell.cpp" />
     <ClCompile Include="src\game\object\map\castle\castle.cpp" />
+    <ClCompile Include="src\game\object\map\castle_basement\castle_basement.cpp" />
     <ClCompile Include="src\game\object\map\forest\forest.cpp" />
     <ClCompile Include="src\game\object\map\garden\garden.cpp" />
     <ClCompile Include="src\game\object\map\home\home.cpp" />
+    <ClCompile Include="src\game\object\map\home_garden\home_garden.cpp" />
     <ClCompile Include="src\game\object\map\map.cpp" />
     <ClCompile Include="src\game\object\map\sea\sea.cpp" />
     <ClCompile Include="src\game\object\map\town\town.cpp" />
@@ -219,10 +221,13 @@
     <ClInclude Include="src\game\object\item\normal_item\flower\flower.h" />
     <ClInclude Include="src\game\object\item\normal_item\shell\shell.h" />
     <ClInclude Include="src\game\object\map\castle\castle.h" />
+    <ClInclude Include="src\game\object\map\castle_basement\castle_basement.h" />
     <ClInclude Include="src\game\object\map\forest\forest.h" />
     <ClInclude Include="src\game\object\map\garden\garden.h" />
     <ClInclude Include="src\game\object\map\home\home.h" />
+    <ClInclude Include="src\game\object\map\home_garden\home_garden.h" />
     <ClInclude Include="src\game\object\map\map.h" />
+    <ClInclude Include="src\game\object\map\map_id.h" />
     <ClInclude Include="src\game\object\map\sea\sea.h" />
     <ClInclude Include="src\game\object\map\town\town.h" />
     <ClInclude Include="src\game\object\timer\timer.h" />
