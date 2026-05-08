@@ -20,9 +20,9 @@ void CTitle::Update(void)
 	{
 		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
 
-#if _DEBUG
-		
+#if _DEBUG		
 #endif
+
 	}
 }
 
