@@ -7,8 +7,23 @@ CStory1& CStory1::GetInstance()
 	return instance;//インスタンスを返す
 }
 
+void CStory1::Initialize(void)
+{
+
+}
+
+void CStory1::Update(void)
+{
+
+}
+
 void CStory1::Draw(void)
 {
 	vivid::DrawTexture("data\\story1.png", { 0,0 });
+
+}
+
+void CStory1::Finalize(void)
+{
 
 }
