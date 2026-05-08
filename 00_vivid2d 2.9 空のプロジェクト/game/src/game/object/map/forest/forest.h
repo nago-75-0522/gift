@@ -8,6 +8,9 @@ public:
 	void Initialize(void);
 	void Update(void);
 	void Draw(void);
+	vivid::Vector2 GetStartPos(void);
+	int GetMapChipSize(void);
+	
 	//引数のマス目の場所が壁かどうかを調べる
 	bool CheckWall(int x, int y);
 
@@ -31,7 +34,5 @@ private:
 	static const int m_map_chip_size;
 	static const int m_map_chip_count_width;
 	static const int m_map_chip_count_height;
-
-	
-	
+		
 };
