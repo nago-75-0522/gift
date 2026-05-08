@@ -1,17 +1,13 @@
 #include"title.h"
-#include"../../../object/timer/timer.h"
+
 #include"vivid.h"
 #include"..\..\scene_manager.h"
-#include"../../../object/map/forest/forest.h"
-#include"../../../object/character/protagonist/protagonist.h"
-CForest fore;
-CProtagonist protagonist;
+
 //èâä˙âª
 void CTitle::Initialize(void)
 {
-	fore.Initialize();
-	protagonist.Initialize();
-	CTimer::GetInstanse().Initialize();
+	
+	
 
 }
 
@@ -19,8 +15,7 @@ void CTitle::Initialize(void)
 void CTitle::Update(void)
 {
 	
-	CTimer::GetInstanse().Update();
-	protagonist.Update();
+	
 	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::Z))
 	{
 		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
@@ -34,9 +29,7 @@ void CTitle::Update(void)
 //ï`âÊ
 void CTitle::Draw(void)
 {
-	fore.Draw();
-	protagonist.Draw();
-	CTimer::GetInstanse().Draw();
+	
 	vivid::DrawTexture("data\\gift.png", { 0,0 });
 	
 }
