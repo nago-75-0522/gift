@@ -8,5 +8,5 @@ enum class SCENE_ID//列挙型
 	TITLE,		//タイトル
 	GAMEMAIN,	//ゲームメイン
 	SAVE,		//セーブデータ
-	
+	INVENTORY,	//インベントリ
 };

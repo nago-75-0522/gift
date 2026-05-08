@@ -19,7 +19,7 @@ void CTitle::Update(void)
 		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
 
 #if _DEBUG
-		vivid::DrawText(48, "ok", { 100,100 });
+		
 #endif
 	}
 }
@@ -28,7 +28,7 @@ void CTitle::Update(void)
 void CTitle::Draw(void)
 {
 	CTimer::GetInstanse().Draw();
-	vivid::DrawText(48, "title", {0,0});
+	vivid::DrawTexture("data\\gift.png", { 0,0 });
 	
 }
 
