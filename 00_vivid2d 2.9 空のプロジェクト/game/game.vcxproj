@@ -175,7 +175,7 @@
     <ClCompile Include="src\game\object\item\battery\third_peace\third_peace.cpp" />
     <ClCompile Include="src\game\object\item\key_item\cyan_shell\cyan_shell.cpp" />
     <ClCompile Include="src\game\object\item\key_item\magenta_flower\magenta_flower.cpp" />
-    <ClCompile Include="src\game\object\item\key_item\white_necklace\white_neklece.cpp" />
+    <ClCompile Include="src\game\object\item\key_item\white_necklace\white_necklace.cpp" />
     <ClCompile Include="src\game\object\item\key_item\yellow_nuts\yellow_nuts.cpp" />
     <ClCompile Include="src\game\object\item\normal_item\flower\flower.cpp" />
     <ClCompile Include="src\game\object\item\normal_item\shell\shell.cpp" />
@@ -212,7 +212,7 @@
     <ClInclude Include="src\game\object\item\battery\third_peace\third_peace.h" />
     <ClInclude Include="src\game\object\item\key_item\cyan_shell\cyan_shell.h" />
     <ClInclude Include="src\game\object\item\key_item\magenta_flower\magenta_flower.h" />
-    <ClInclude Include="src\game\object\item\key_item\white_necklace\white_necklece.h" />
+    <ClInclude Include="src\game\object\item\key_item\white_necklace\white_necklace.h" />
     <ClInclude Include="src\game\object\item\key_item\yellow_nuts\yellow_nuts.h" />
     <ClInclude Include="src\game\object\item\normal_item\flower\flower.h" />
     <ClInclude Include="src\game\object\item\normal_item\shell\shell.h" />

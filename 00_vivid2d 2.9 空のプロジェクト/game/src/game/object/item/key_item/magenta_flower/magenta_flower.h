@@ -5,7 +5,7 @@
 class CMagenta_Flower
 {
 public:
-	CMagenta_Flower(void) = default;
+	CMagenta_Flower(void);
 	~CMagenta_Flower(void) = default;
 
 	void Initialize(void);

@@ -9,9 +9,13 @@ CCyan_Shell::CCyan_Shell(void)
 
 void CCyan_Shell::Initialize(void)
 {
+	m_isHitFlag = false;
 }
 
 void CCyan_Shell::Draw(void)
 {
+	if (m_isHitFlag == true)
+		return;
+
 	vivid::DrawTexture("data\\cyan_item.png", m_position);
 }
