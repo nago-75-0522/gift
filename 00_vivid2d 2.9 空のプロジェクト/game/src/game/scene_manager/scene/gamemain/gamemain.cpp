@@ -15,11 +15,12 @@ void CGamemain::Initialize(void)
 //更新
 void CGamemain::Update(void)
 {
-	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::Z))
+	//初めからを押したらオープニングに飛ぶ
+	/* if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::Z))
 	{
 		CStory::GetInstance().Change(STORY_ID::OPNING);
 	
-	}
+	}*/
 	CStory::GetInstance().Update();//更新呼び出し
 }
 

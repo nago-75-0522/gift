@@ -1,16 +1,15 @@
 #pragma once
 #include"..\story_manager.h"
 
-
-class CStory1 :public CGamemain
+class COpning :public CGamemain
 {
-	public:
+public:
 
 	//インスタンス呼び出す
-	static CStory1& GetInstance();
+	static COpning& GetInstance();
 
-	CStory1(void) = default;
-	~CStory1(void) = default;
+	COpning(void) = default;
+	~COpning(void) = default;
 
 	void Initialize(void);
 	void Update(void);
