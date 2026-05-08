@@ -51,14 +51,9 @@ void CSceneManager::Finalize()
 
 void CSceneManager::Change(SCENE_ID id)
 {
-	//元のシーンを解放
-	//CSceneManager::Finalize();
 
 	//呼び出されたシーンをいれる
 	m_NextID = id;//id次のやつ
-
-	//切り替え先のシーンを初期化
-	//CSceneManager::Initialize();
 
 }
 

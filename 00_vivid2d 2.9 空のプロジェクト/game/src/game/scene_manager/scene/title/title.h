@@ -14,6 +14,7 @@ class CTitle :public IScene
 		//解放
 		void Finalize(void)override;
 
+	
 
 	CTitle(void) = default;//コンストラクタ
 	~CTitle(void) = default;//デストラクタ
