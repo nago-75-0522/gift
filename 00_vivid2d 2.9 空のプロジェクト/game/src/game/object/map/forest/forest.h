@@ -8,6 +8,8 @@ public:
 	void Initialize(void);
 	void Update(void);
 	void Draw(void);
+	void Fopen(void);
+
 	vivid::Vector2 GetStartPos(void);
 	int GetMapChipSize(void);
 	

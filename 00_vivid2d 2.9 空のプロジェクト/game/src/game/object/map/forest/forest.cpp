@@ -1,10 +1,10 @@
 #include"forest.h"
+#include"forest_id.h"
+const int CForest::m_map_chip_size = 64;
+const int CForest::m_map_chip_count_width= vivid::WINDOW_WIDTH / m_map_chip_size;
+const int CForest::m_map_chip_count_height = vivid::WINDOW_HEIGHT / m_map_chip_size+1;
 
-const int CForest::m_map_chip_size = 48;
-const int CForest::m_map_chip_count_width= vivid::WINDOW_WIDTH / m_map_chip_size + 1;
-const int CForest::m_map_chip_count_height = vivid::WINDOW_HEIGHT / m_map_chip_size;
-
-constexpr int width=64;
+constexpr int width = 64;
 constexpr int height=64;
 unsigned char m_Map[height][width];
 
@@ -26,7 +26,10 @@ void CForest::Initialize(void)
 	FILE* fp = nullptr;
 
 	//ファイルを開く 「r」は読み取り
+	
 	fopen_s(&fp, "data\\map.csv", "r");
+
+
 
 	//サイズを調べる
 	fseek(fp, 0, SEEK_END);
@@ -67,11 +70,12 @@ void CForest::Initialize(void)
 
 void CForest::Update(void)
 {
+	
 }
 
 void CForest::Draw(void)
 {
-	vivid::DrawTexture("data//field.png", { 0.0,0.0 });
+	vivid::DrawTexture("data//field.png", {0.0,0.0 });
 
 	//要素数分繰り返す
 	for (int i = 0; i < m_map_chip_count_height; ++i)
@@ -96,6 +100,29 @@ void CForest::Draw(void)
 			vivid::DrawTexture("data\\map_chip.png", pos, 0xffffffff, rect);
 		}
 	}
+}
+
+void CForest::Fopen(void)
+{
+
+
+	fopen_s(&fp, "data\\map.csv", "r");
+
+
+
+	//サイズを調べる
+	fseek(fp, 0, SEEK_END);
+	int size = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	//サイズ分だけの大きさの入れ物を用意する（一時的なデータ）
+	char* buf = new char[size];
+
+	// データ（csvファイル内の文字列）を読み込む
+	fread(buf, size, 1, fp);
+
+	//ファイルを閉じる（しないと消せなくなる）
+	fclose(fp);
 }
 
 vivid::Vector2 CForest::GetStartPos(void)
