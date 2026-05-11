@@ -5,10 +5,14 @@
 class CForth_Peace
 {
 public:
-	CForth_Peace(void) = default;
+	CForth_Peace(void);
 	~CForth_Peace(void) = default;
+
+	void Initialize(void);
 
 	void Draw(void);
 private:
+	bool m_isHitFlag;
+
 	static const vivid::Vector2 m_position;
 };

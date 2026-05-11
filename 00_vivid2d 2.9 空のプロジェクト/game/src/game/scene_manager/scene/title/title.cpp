@@ -1,13 +1,16 @@
 #include"title.h"
-
-#include"vivid.h"
 #include"..\..\scene_manager.h"
+
+
+const vivid::Vector2 pos = { vivid::WINDOW_WIDTH / 2,(vivid::WINDOW_HEIGHT * 2) / 3 };
 
 //‰Šú‰»
 void CTitle::Initialize(void)
 {
-	
-	
+	/* ‰æ‘œ‚ğ“Ç‚İ‚ñ‚ÅŒvZ */
+	vivid::LoadTexture("data\\start.png");
+	CTitle::start_logo.x = (vivid::WINDOW_WIDTH - vivid::GetTextureWidth("data\\start.png")) / 2.0f;//‚˜À•W
+	CTitle::start_logo.y = (vivid::WINDOW_HEIGHT - vivid::GetTextureHeight("data\\start.png")) * 2 / 3;//‚™À•W
 
 }
 
@@ -16,8 +19,9 @@ void CTitle::Update(void)
 {
 	
 	
-	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::Z))
+	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::SPACE))
 	{
+	
 		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
 
 #if _DEBUG		
@@ -29,9 +33,11 @@ void CTitle::Update(void)
 //•`‰æ
 void CTitle::Draw(void)
 {
-	
 	vivid::DrawTexture("data\\gift.png", { 0,0 });
+	vivid::DrawTexture("data\\start.png", start_logo);
+
 	
+
 }
 
 //‰ğ•ú
