@@ -1,5 +1,6 @@
 #pragma once
 #include"..\scene.h"
+#include <vivid.h>
 
 
 class CTitle :public IScene
@@ -21,5 +22,8 @@ class CTitle :public IScene
 
 	
 private:
+	 vivid::Vector2 start_logo;//スタート位置
+
+
 
 };
