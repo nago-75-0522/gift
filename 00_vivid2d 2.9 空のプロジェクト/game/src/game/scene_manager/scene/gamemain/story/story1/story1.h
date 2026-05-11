@@ -12,9 +12,9 @@ class CStory1 :public CGamemain
 	CStory1(void) = default;
 	~CStory1(void) = default;
 
-	void Initialize(void);
-	void Update(void);
-	void Draw(void);
-	void Finalize(void);
+	void Initialize(void)override;
+	void Update(void)override;
+	void Draw(void)override;
+	void Finalize(void)override;
 
 };
