@@ -2,11 +2,11 @@
 /* 白色のネックレス */
 #include"vivid.h"
 
-class CWhite_Necklece
+class CWhite_Necklace
 {
 public:
-	CWhite_Necklece(void) = default;
-	~CWhite_Necklece(void) = default;
+	CWhite_Necklace(void);
+	~CWhite_Necklace(void) = default;
 
 	void Initialize(void);
 
@@ -15,5 +15,5 @@ public:
 private:
 	static const vivid::Vector2 m_position;
 
-	bool m_isHitFlag;
+	bool m_isHitFlag; //採ったかどうか
 };

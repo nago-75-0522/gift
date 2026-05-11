@@ -14,10 +14,10 @@ enum class STORY_ID
 class CStory :public CGamemain
 {
 public:
-	void Initialize(void);
-	void Update(void);
-	void Draw(void);
-	void Finalize(void);
+	void Initialize(void)override;
+	void Update(void)override;
+	void Draw(void)override;
+	void Finalize(void)override;
 
 
 	//インスタンス呼び出す

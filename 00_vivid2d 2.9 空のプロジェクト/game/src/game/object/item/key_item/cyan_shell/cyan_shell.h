@@ -14,5 +14,5 @@ public:
 private:
 	static const vivid::Vector2 m_position;
 
-	bool m_isHitFlag;
+	bool m_isHitFlag; //採ったかどうか
 };
