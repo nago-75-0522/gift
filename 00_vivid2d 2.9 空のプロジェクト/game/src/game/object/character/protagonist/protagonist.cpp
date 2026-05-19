@@ -1,15 +1,15 @@
 ﻿/* 主人公 */
 #include"protagonist.h"
-#include"../../map/forest/forest.h"
+#include"../../map/forest_maneger/forest/forest.h"
 
-CForest forest;
+
 
 const int CProtagonist::m_chara_height=48;
 const int CProtagonist::m_chara_width=48;
 const int CProtagonist::m_chara_move_time = 12;
 
 //移動速度（道のり/時間）
-const float CProtagonist::m_chara_move_speed = (float)forest.GetMapChipSize() / (float) m_chara_move_time;
+const float CProtagonist::m_chara_move_speed = (float)CForest::GetInstance().GetMapChipSize() / (float) m_chara_move_time;
 CProtagonist::CProtagonist(void)
 	:  m_CharaPos{0.0f,0.0f}
 	,  m_CharaRect{0,0,m_chara_width,m_chara_height}
@@ -22,7 +22,7 @@ CProtagonist::CProtagonist(void)
 
 void CProtagonist::Initialize(void)
 {
-	m_CharaPos = forest.GetStartPos();
+	m_CharaPos = CForest::GetInstance().GetStartPos();
 }
 
 void CProtagonist::Update(void)
@@ -61,54 +61,53 @@ void CProtagonist::WaitCharacter()
 {
 	namespace keyboard = vivid::keyboard;
 
-	int x = (int)((m_CharaPos.x + 0.5f) / (float)forest.GetMapChipSize());
-	int y = (int)((m_CharaPos.y + 0.5f) / (float)forest.GetMapChipSize());
+	int x = (int)((m_CharaPos.x + 0.5f) / (float)CForest::GetInstance().GetMapChipSize());
+	int y = (int)((m_CharaPos.y + 0.5f) / (float)CForest::GetInstance().GetMapChipSize());
 
 		
-			if (keyboard::Button(keyboard::KEY_ID::W))
-			{
-				m_Chara_Direction = CHARA_DIRECTION::UP;
+	if (keyboard::Button(keyboard::KEY_ID::W))
+	{
+		m_Chara_Direction = CHARA_DIRECTION::UP;
 
-				//自分のいるマス目から一つ上側を調べる。これがfalseなら進める。
-				if (!forest.CheckWall(x, y - 1))
-				{
-					m_CharaSpeed.y = -m_chara_move_speed;
-					m_Chara_State = CHARA_STATE::MOVE;
-				}
-			}
-			else if (keyboard::Button(keyboard::KEY_ID::S))
-			{
-				m_Chara_Direction = CHARA_DIRECTION::DOWN;
+		//自分のいるマス目から一つ上側を調べる。これがfalseなら進める。
+		if (!CForest::GetInstance().CheckWall(x, y - 1))
+		{
+			m_CharaSpeed.y = -m_chara_move_speed;
+			m_Chara_State = CHARA_STATE::MOVE;
+		}
+	}
+	else if (keyboard::Button(keyboard::KEY_ID::S))
+	{
+		m_Chara_Direction = CHARA_DIRECTION::DOWN;
 
-				//自分のいるマス目から一つ下側を調べる。
-				if (!forest.CheckWall(x, y + 1))
-				{
-					m_CharaSpeed.y = +m_chara_move_speed;
-					m_Chara_State = CHARA_STATE::MOVE;
-				}
-			}
-			else if (keyboard::Button(keyboard::KEY_ID::D))
-			{
-				m_Chara_Direction = CHARA_DIRECTION::RIGHT;
+		//自分のいるマス目から一つ下側を調べる。
+		if (!CForest::GetInstance().CheckWall(x, y + 1))
+		{
+			m_CharaSpeed.y = +m_chara_move_speed;
+			m_Chara_State = CHARA_STATE::MOVE;
+		}
+	}
+	else if (keyboard::Button(keyboard::KEY_ID::D))
+	{
+		m_Chara_Direction = CHARA_DIRECTION::RIGHT;
 
-				//自分のいるマス目から一つ右側を調べる。
-				if (!forest.CheckWall(x + 1, y))
-				{
-					m_CharaSpeed.x = +m_chara_move_speed;
-					m_Chara_State = CHARA_STATE::MOVE;
-				}
-			}
-			else if (keyboard::Button(keyboard::KEY_ID::A))
-			{
-				m_Chara_Direction = CHARA_DIRECTION::LEFT;
+		if (!CForest::GetInstance().CheckWall(x + 1, y))
+		{
+			m_CharaSpeed.x = +m_chara_move_speed;
+			m_Chara_State = CHARA_STATE::MOVE;
+		}
+	}
+	else if (keyboard::Button(keyboard::KEY_ID::A))
+	{
+		m_Chara_Direction = CHARA_DIRECTION::LEFT;
 
-				//自分のいるマス目から一つ左側を調べる。
-				if (!forest.CheckWall(x - 1, y))
-				{
-					m_CharaSpeed.x = -m_chara_move_speed;
-					m_Chara_State = CHARA_STATE::MOVE;
-				}
-			}
+		//自分のいるマス目から一つ左側を調べる。
+		if (!CForest::GetInstance().CheckWall(x - 1, y))
+		{
+			m_CharaSpeed.x = -m_chara_move_speed;
+			m_Chara_State = CHARA_STATE::MOVE;
+		}
+	}
 		
 }
 
@@ -134,4 +133,15 @@ void CProtagonist::MoveCharacter()
 		//アニメーションフレームを更新
 		++m_CharaAnimeFrame %= 3;
 	}
+}
+
+vivid::Vector2 CProtagonist::GetCharaPos()
+{
+	return m_CharaPos;
+}
+
+CProtagonist& CProtagonist::GetInstance()
+{
+	static CProtagonist instance;
+	return instance;
 }

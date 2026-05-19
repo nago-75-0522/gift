@@ -1,5 +1,7 @@
 #include"forest.h"
-#include"forest_id.h"
+#include"../../../character/protagonist/protagonist.h"
+#include"../forest_manager.h"
+
 const int CForest::m_map_chip_size = 64;
 const int CForest::m_map_chip_count_width= vivid::WINDOW_WIDTH / m_map_chip_size;
 const int CForest::m_map_chip_count_height = vivid::WINDOW_HEIGHT / m_map_chip_size+1;
@@ -15,6 +17,7 @@ CForest::CForest(void)
 
 void CForest::Initialize(void)
 {
+	CForest_Manager::GetInstance().Initialize();
 	for (int i = 0; i < m_map_chip_count_height; ++i)
 	{
 		for (int k = 0; k < m_map_chip_count_width; ++k)
@@ -25,9 +28,7 @@ void CForest::Initialize(void)
 	/*** ファイル操作 ***/
 	FILE* fp = nullptr;
 
-	//ファイルを開く 「r」は読み取り
-	
-	fopen_s(&fp, "data\\map.csv", "r");
+	fopen_s(&fp, CForest_Manager::GetInstance().GetMapName(), "r");
 
 
 
@@ -45,13 +46,12 @@ void CForest::Initialize(void)
 	//ファイルを閉じる（しないと消せなくなる）
 	fclose(fp);
 
-
 	/*** データの解析 ***/
 	//データのサイズ分繰り返し
 	for (int i = 0, k = 0; i < size; ++i)
 	{
 		//文字の０～３であれば、数値に変換する
-		if (buf[i] >= '0' && buf[i] <= '3')
+		if (buf[i] >= '0' && buf[i] <= '4')
 		{
 			char t = buf[i];
 
@@ -65,12 +65,19 @@ void CForest::Initialize(void)
 
 	//一時的なデータを削除
 	delete[] buf;
-	
 }
 
 void CForest::Update(void)
 {
-	
+	int x = (int)((CProtagonist::GetInstance().GetCharaPos().x + 0.5f) / (float)m_map_chip_size);
+	int y = (int)((CProtagonist::GetInstance().GetCharaPos().y + 0.5f) / (float)m_map_chip_size);
+
+	if (CheckChangeOver(x, y) && vivid::keyboard::Button(vivid::keyboard::KEY_ID::D))
+	{
+		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST2);
+
+	}
+	CForest_Manager::GetInstance().Update();
 }
 
 void CForest::Draw(void)
@@ -100,13 +107,18 @@ void CForest::Draw(void)
 			vivid::DrawTexture("data\\map_chip.png", pos, 0xffffffff, rect);
 		}
 	}
+
+	
 }
+
+
 
 void CForest::Fopen(void)
 {
+	/*** ファイル操作 ***/
+	FILE* fp = nullptr;
 
-
-	fopen_s(&fp, "data\\map.csv", "r");
+	fopen_s(&fp, CForest_Manager::GetInstance().GetMapName(), "r");
 
 
 
@@ -123,6 +135,26 @@ void CForest::Fopen(void)
 
 	//ファイルを閉じる（しないと消せなくなる）
 	fclose(fp);
+
+	/*** データの解析 ***/
+	//データのサイズ分繰り返し
+	for (int i = 0, k = 0; i < size; ++i)
+	{
+		//文字の０～4であれば、数値に変換する
+		if (buf[i] >= '0' && buf[i] <= '4')
+		{
+			char t = buf[i];
+
+			//データ入力
+			m_Map[k / m_map_chip_count_width][k % m_map_chip_count_width]
+				= (unsigned char)atoi(&t);
+
+			++k;
+		}
+	}
+
+	//一時的なデータを削除
+	delete[] buf;
 }
 
 vivid::Vector2 CForest::GetStartPos(void)
@@ -150,6 +182,8 @@ int CForest::GetMapChipSize(void)
 
 
 
+
+
 bool CForest::CheckWall(int x, int y)
 {
 	if (x < 0)
@@ -167,7 +201,30 @@ bool CForest::CheckWall(int x, int y)
 	return false;
 }
 
-bool CForest::CheckGoal(int x, int y)
+
+
+bool CForest::CheckChangeOver(int x, int y)
 {
+	
+	if (x < 0)
+		x = 0;
+	if (x > m_map_chip_count_width)
+		x = m_map_chip_count_width - 1;
+	if (y < 0)
+		y = 0;
+	if (y > m_map_chip_count_height)
+		y = m_map_chip_count_height - 1;
+
+
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over)
+	  return true;
+
 	return false;
 }
+
+CForest& CForest::GetInstance()
+{
+	static CForest instance;//CSceneManager型のインスタンスの作成
+	return instance;//インスタンスを返す
+}
+

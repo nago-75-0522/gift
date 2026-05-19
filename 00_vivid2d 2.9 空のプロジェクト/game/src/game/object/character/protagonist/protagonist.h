@@ -18,6 +18,8 @@ public:
 	void Finalize(void);
 	void WaitCharacter();
 	void MoveCharacter();
+	vivid::Vector2 GetCharaPos();
+	static CProtagonist& GetInstance();
 private:
 
 	enum class CHARA_DIRECTION

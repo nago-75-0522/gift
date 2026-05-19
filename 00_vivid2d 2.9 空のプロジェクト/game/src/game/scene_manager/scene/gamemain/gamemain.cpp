@@ -1,11 +1,10 @@
 #include"gamemain.h"
 #include"vivid.h"
 #include"story/story_manager.h"
-#include"../../../object/map/forest/forest.h"
+#include"../../../object/map/forest_maneger/forest/forest.h"
 #include"../../../object/character/protagonist/protagonist.h"
 #include"../../../object/timer/timer.h"
-CForest fore;
-CProtagonist protagonist;
+#include"../../../object/map/forest_maneger/forest_manager.h"
 //はじめからか続きからを選択
 //初めからの場合はプロローグ　続きからならセーブしているステージからスタート
 //親クラスの作成
@@ -13,8 +12,8 @@ CProtagonist protagonist;
 void CGamemain::Initialize(void)
 {
 
-	fore.Initialize();
-	protagonist.Initialize();
+	CForest::GetInstance().Initialize();
+	CProtagonist::GetInstance().Initialize();
 	CTimer::GetInstanse().Initialize();
 	CStory::GetInstance().Initialize();//初期化呼び出し
 }
@@ -22,11 +21,11 @@ void CGamemain::Initialize(void)
 
  void CGamemain::Update(void)
  {
-CStory::GetInstance().Change(STORY_ID::OPNING);
+	 CStory::GetInstance().Change(STORY_ID::OPNING);
 
-	
+	 CForest::GetInstance().Update();
 	CTimer::GetInstanse().Update();
-	protagonist.Update();
+	CProtagonist::GetInstance().Update();
 	CStory::GetInstance().Update();//更新呼び出し
 }
 
@@ -36,8 +35,8 @@ void CGamemain::Draw(void)
 	CStory::GetInstance().Draw();//描画呼び出し
 	vivid::DrawText(48, "menu", { 0,0 });
 
-	fore.Draw();
-	protagonist.Draw();
+	CForest::GetInstance().Draw();
+	CProtagonist::GetInstance().Draw();
 	CTimer::GetInstanse().Draw();
 
 }
