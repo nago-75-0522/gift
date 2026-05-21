@@ -2,9 +2,11 @@
 #include"story1/story1.h"
 #include"opning/opning.h"
 
-
+//初期値の設定
 CStory::CStory()
 	:m_Story(nullptr)
+	, m_Current_StoryID(STORY_ID::OPNING)
+	, m_Next_StoryID(STORY_ID::OPNING)
 {
 }
 
