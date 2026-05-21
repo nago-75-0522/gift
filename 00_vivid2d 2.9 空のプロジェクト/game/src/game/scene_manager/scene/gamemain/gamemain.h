@@ -37,6 +37,8 @@ private:
 	static const std::string m_Button_Image[(int)SELECT_BUTTON::MAX];//ボタン画像名
 	static const unsigned int m_Select_Button_Color;				//選択中用の色
 
+	bool m_IsStoryMode = false;//ストーリーモードかどうか
+
 
 	vivid::Vector2 m_Button_Position;	//ボタンの座標
 	vivid::Vector2 m_Finger_Position;	//選択印(指)の座標
