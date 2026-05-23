@@ -181,8 +181,8 @@
     <ClCompile Include="src\game\object\item\normal_item\shell\shell.cpp" />
     <ClCompile Include="src\game\object\map\castle\castle.cpp" />
     <ClCompile Include="src\game\object\map\castle_basement\castle_basement.cpp" />
-    <ClCompile Include="src\game\object\map\forest_maneger\forest\forest.cpp" />
-    <ClCompile Include="src\game\object\map\forest_maneger\forest_manager.cpp" />
+    <ClCompile Include="src\game\object\map\forest_manager\forest\forest.cpp" />
+    <ClCompile Include="src\game\object\map\forest_manager\forest_manager.cpp" />
     <ClCompile Include="src\game\object\map\garden\garden.cpp" />
     <ClCompile Include="src\game\object\map\home\home.cpp" />
     <ClCompile Include="src\game\object\map\home_garden\home_garden.cpp" />
@@ -224,9 +224,9 @@
     <ClInclude Include="src\game\object\item\normal_item\shell\shell.h" />
     <ClInclude Include="src\game\object\map\castle\castle.h" />
     <ClInclude Include="src\game\object\map\castle_basement\castle_basement.h" />
-    <ClInclude Include="src\game\object\map\forest_maneger\forest\forest.h" />
-    <ClInclude Include="src\game\object\map\forest_maneger\forest\forest_id.h" />
-    <ClInclude Include="src\game\object\map\forest_maneger\forest_manager.h" />
+    <ClInclude Include="src\game\object\map\forest_manager\forest\forest.h" />
+    <ClInclude Include="src\game\object\map\forest_manager\forest\forest_id.h" />
+    <ClInclude Include="src\game\object\map\forest_manager\forest_manager.h" />
     <ClInclude Include="src\game\object\map\garden\garden.h" />
     <ClInclude Include="src\game\object\map\home\home.h" />
     <ClInclude Include="src\game\object\map\home_garden\home_garden.h" />
