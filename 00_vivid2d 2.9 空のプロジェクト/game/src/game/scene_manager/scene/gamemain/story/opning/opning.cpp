@@ -23,7 +23,7 @@ void COpning::Update(void)
 
 void COpning::Draw(void)
 {
-	vivid::DrawTexture("data\\op.png", { 0,0 });
+	vivid::DrawText(48, "opning", { vivid::WINDOW_WIDTH / 2 - 100,0 }, 0xfffffffff);
 
 }
 

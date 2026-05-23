@@ -16,6 +16,7 @@ void CStory1::Initialize(void)
 void CStory1::Update(void)
 {
 
+
 	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::T))
 	{
 
