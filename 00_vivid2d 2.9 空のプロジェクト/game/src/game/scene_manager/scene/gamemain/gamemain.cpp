@@ -1,7 +1,6 @@
 #include"gamemain.h"
 #include"vivid.h"
 #include"story/story_manager.h"
-#include"../../../object/map/forest/forest.h"
 #include"../../../object/character/protagonist/protagonist.h"
 #include"../../../object/timer/timer.h"
 
