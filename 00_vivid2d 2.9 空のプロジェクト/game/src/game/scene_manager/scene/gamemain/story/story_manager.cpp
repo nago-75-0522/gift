@@ -1,6 +1,7 @@
 ﻿#include"story_manager.h"
 #include"story1/story1.h"
 #include"opning/opning.h"
+#include"..\stage\stage_manager.h"
 
 //初期値の設定
 CStory::CStory()
@@ -19,6 +20,10 @@ CStory& CStory::GetInstance()
 //初期化
 void CStory::Initialize(void)
 {
+		//毎回オープニングに初期化する
+		m_Current_StoryID = STORY_ID::OPNING;
+		m_Next_StoryID = STORY_ID::OPNING;
+
 	_ChangeStory();
 	if (m_Story)
 	{
@@ -31,6 +36,8 @@ void CStory::Initialize(void)
 //更新
 void CStory::Update(void)
 {
+
+
 	if (m_Current_StoryID != m_Next_StoryID)
 	{
 		_ChangeStory();
@@ -43,6 +50,7 @@ void CStory::Update(void)
 
 	if (m_Story)
 		m_Story->Update();
+
 }
 
 //描画
@@ -50,6 +58,8 @@ void CStory::Draw(void)
 {
 	if (m_Story)
 		m_Story->Draw();
+
+
 }
 
 //解放
@@ -58,13 +68,14 @@ void CStory::Finalize(void)
 	
 }
 
-void CStory::Change(STORY_ID id)
+void CStory::ChangeStory(STORY_ID id)
 {
 
 	//呼び出されたシーンをいれる
 	m_Next_StoryID = id;//id次のやつ
 
 }
+
 
 //ストーリー切り替え
 void CStory::_ChangeStory()
@@ -74,6 +85,7 @@ void CStory::_ChangeStory()
 
 	delete m_Story;
 	m_Story = nullptr;
+
 	switch (m_Next_StoryID)
 	{
 	case STORY_ID::OPNING:
@@ -85,5 +97,4 @@ void CStory::_ChangeStory()
 		break;
 	}
 }
-
 

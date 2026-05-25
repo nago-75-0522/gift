@@ -1,5 +1,6 @@
 #include"opning.h"
 #include"vivid.h"
+#include"..\story_manager.h"
 
 COpning& COpning::GetInstance()
 {
@@ -14,12 +15,12 @@ void COpning::Initialize(void)
 
 void COpning::Update(void)
 {
-	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::Z))
+	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 	{
-		CStory::GetInstance().Change(STORY_ID::STORY1);
-
+		CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
 	}
 }
+
 
 void COpning::Draw(void)
 {
