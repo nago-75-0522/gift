@@ -24,8 +24,6 @@ void CStory::Initialize(void)
 		m_Current_StoryID = STORY_ID::OPNING;
 		m_Next_StoryID = STORY_ID::OPNING;
 
-		CStage::GetInstance().Initialize();
-
 	_ChangeStory();
 	if (m_Story)
 	{
@@ -53,8 +51,6 @@ void CStory::Update(void)
 	if (m_Story)
 		m_Story->Update();
 
-	CStage::GetInstance().Update();
-
 }
 
 //描画
@@ -62,8 +58,6 @@ void CStory::Draw(void)
 {
 	if (m_Story)
 		m_Story->Draw();
-
-	CStage::GetInstance().Draw();
 
 
 }
@@ -82,6 +76,7 @@ void CStory::ChangeStory(STORY_ID id)
 
 }
 
+
 //ストーリー切り替え
 void CStory::_ChangeStory()
 {
@@ -90,6 +85,7 @@ void CStory::_ChangeStory()
 
 	delete m_Story;
 	m_Story = nullptr;
+
 	switch (m_Next_StoryID)
 	{
 	case STORY_ID::OPNING:
@@ -98,10 +94,7 @@ void CStory::_ChangeStory()
 
 	case STORY_ID::STORY1:
 		m_Story = new CStory1();
-		CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);//インスタンスを呼び出す
-
 		break;
 	}
 }
-
 

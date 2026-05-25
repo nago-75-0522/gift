@@ -15,6 +15,8 @@ public:
 	void Finalize(void)override;
 
 	void Menu(void);
+	
+	void DrawMenu(void);//描画用の関数
 
 	CGamemain(void) = default;//コンストラクタ
 	~CGamemain(void) = default;//デストラクタ

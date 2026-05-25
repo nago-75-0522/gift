@@ -17,9 +17,9 @@ void CStage1::Update(void)
 {
     if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
     {
-        CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
 
-        // ★ GameMain に「ステージへ行きたい」と知らせる
+        CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
+        //GameMainにステージへ行きたいと知らせる
         CStory::GetInstance().m_RequestStage = true;
     }
 }

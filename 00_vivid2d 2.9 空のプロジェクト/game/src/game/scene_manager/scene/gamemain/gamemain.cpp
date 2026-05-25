@@ -19,14 +19,14 @@ const unsigned int CGamemain::m_Select_Button_Color(0xffffffff);
 //初期化
 void CGamemain::Initialize(void)
 {
+	m_Now_Select = SELECT_BUTTON::START;
+	m_Now_GameState = GAME_STATE::MENU;
 
 	m_Button_Position = vivid::Vector2::ZERO;//位置
 	//ｘは配列に合わせるため
 	m_Finger_Position.x = m_Button_x[(int)m_Now_Select] - m_Finger_Width;//指のｘ座標の初期化
 	//矢印yは選択中ボタンの高さと変わらないため
 	m_Finger_Position.y = m_Button_y;									//指のy座標の初期化
-	m_Now_Select = SELECT_BUTTON::START;
-	m_Now_GameState = GAME_STATE::MENU;
 
 }
 
@@ -55,13 +55,13 @@ void CGamemain::Update(void)
 			// STORY
 		case GAME_STATE::STORY:
 			CStory::GetInstance().Update();
-
 			//Story側がStageに行きたいときにtrueにする
 			if (CStory::GetInstance().m_RequestStage == true)
 			{
 				CStory::GetInstance().m_RequestStage = false;
 				m_Now_GameState = GAME_STATE::STAGE;
 			}
+		
 			break;
 
 
@@ -75,45 +75,29 @@ void CGamemain::Update(void)
 
 void CGamemain::Draw(void)
 {
-	vivid::DrawTexture("data\\t_bg.png", { 0,0 });
-	vivid::DrawText(48, "menu", { vivid::WINDOW_WIDTH / 2 - 100,0 }, 0xfffffffff);
-	vivid::DrawTexture("data\\arrow.png", m_Finger_Position);//選択中ボタン
+		switch (m_Now_GameState)
+		{
+			
+			//MENU
+		case GAME_STATE::MENU:
+			CGamemain::DrawMenu();
+		
+			break;
 
-	for (int i = 0; i < (int)SELECT_BUTTON::MAX; i++)
-	{
-		//ボタン座標を入れるs
-		m_Button_Position = vivid::Vector2(m_Button_x[i], m_Button_y);
-		//ボタンの描画
-		if (i == (int)m_Now_Select)
-		{
-			//選択しているボタンを灰色にする
- 			vivid::DrawTexture(m_Button_Image[i], m_Button_Position, m_Select_Button_Color);
-		}
-		else
-		{
-			vivid::DrawTexture(m_Button_Image[i], m_Button_Position);
+
+			//STORY
+
+		case GAME_STATE::STORY:
+			CStory::GetInstance().Draw();
+			break;
+
+
+			// STAGE
+		case GAME_STATE::STAGE:
+			CStage::GetInstance().Draw();
+			break;
 		}
 	}
-
-	switch (m_Now_GameState)
-	{
-	case CGamemain::GAME_STATE::MENU:
-		break;
-
-		//ストーリーの状態の時
-	case CGamemain::GAME_STATE::STORY:
-		//CStory::GetInstance().Draw();
-		break;
-
-		//ステージの状態の時
-	case CGamemain::GAME_STATE::STAGE:
-		//CStage::GetInstance().Draw();
-		break;
-	default:
-		break;
-	}
-
-}
 
 void CGamemain::Finalize(void)
 {
@@ -145,4 +129,21 @@ void CGamemain::Menu(void)
 
 		
 	
+}
+
+void CGamemain::DrawMenu(void)
+{
+	vivid::DrawTexture("data\\t_bg.png", { 0,0 });
+	vivid::DrawText(48, "menu", { vivid::WINDOW_WIDTH / 2 - 100,0 }, 0xfffffffff);
+	vivid::DrawTexture("data\\arrow.png", m_Finger_Position);
+
+	for (int i = 0; i < (int)SELECT_BUTTON::MAX; i++)
+	{
+		m_Button_Position = vivid::Vector2(m_Button_x[i], m_Button_y);
+
+		if (i == (int)m_Now_Select)
+			vivid::DrawTexture(m_Button_Image[i], m_Button_Position, m_Select_Button_Color);
+		else
+			vivid::DrawTexture(m_Button_Image[i], m_Button_Position);
+	}
 }
