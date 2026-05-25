@@ -56,10 +56,10 @@ private:
 	static const float m_chara_move_speed;
 
 	//変数
-	vivid::Vector2 m_CharaPos;
-	vivid::Rect m_CharaRect ;
-	vivid::Vector2 m_CharaSpeed;
-	int m_CharaAnimeFrame ;
-	int m_CharaAnimeTimer;
-	int m_CharaMoveTimer;
+	vivid::Vector2 m_Chara_Pos;
+	vivid::Rect m_Chara_Rect ;
+	vivid::Vector2 m_Chara_Speed;
+	int m_Chara_Anime_Frame ;
+	int m_Chara_Anime_Timer;
+	int m_Chara_Move_Timer;
 };
