@@ -1,6 +1,7 @@
 ﻿/* 主人公 */
 #include"protagonist.h"
-#include"../../map/forest_maneger/forest/forest.h"
+#include"../../map/forest_manager/forest/forest.h"
+#include"../../map/forest_manager/forest_manager.h"
 
 
 
@@ -22,7 +23,8 @@ CProtagonist::CProtagonist(void)
 
 void CProtagonist::Initialize(void)
 {
-	m_CharaPos = CForest::GetInstance().GetStartPos();
+	m_CharaPos = CForest::GetInstance().GetBack();
+	 
 }
 
 void CProtagonist::Update(void)
@@ -57,6 +59,34 @@ void CProtagonist::Finalize(void)
 {
 }
 
+void CProtagonist::SetChangePosition1()
+{
+	m_CharaPos = CForest::GetInstance().GetChange1();
+}
+
+void CProtagonist::SetChangePosition2()
+{
+	m_CharaPos = CForest::GetInstance().GetChange2();
+}
+
+void CProtagonist::SetChangePosition3()
+{
+	m_CharaPos = CForest::GetInstance().GetChange3();
+}
+
+void CProtagonist::SetChangePosition4()
+{
+	m_CharaPos = CForest::GetInstance().GetChange4();
+}
+
+void CProtagonist::SetBackPosition()
+{
+	m_CharaPos = CForest::GetInstance().GetBack();
+}
+
+
+
+
 void CProtagonist::WaitCharacter()
 {
 	namespace keyboard = vivid::keyboard;
@@ -65,7 +95,7 @@ void CProtagonist::WaitCharacter()
 	int y = (int)((m_CharaPos.y + 0.5f) / (float)CForest::GetInstance().GetMapChipSize());
 
 		
-	if (keyboard::Button(keyboard::KEY_ID::W))
+	if (Button(keyboard::KEY_ID::W))
 	{
 		m_Chara_Direction = CHARA_DIRECTION::UP;
 
@@ -76,7 +106,7 @@ void CProtagonist::WaitCharacter()
 			m_Chara_State = CHARA_STATE::MOVE;
 		}
 	}
-	else if (keyboard::Button(keyboard::KEY_ID::S))
+	else if (Button(keyboard::KEY_ID::S))
 	{
 		m_Chara_Direction = CHARA_DIRECTION::DOWN;
 
@@ -87,7 +117,7 @@ void CProtagonist::WaitCharacter()
 			m_Chara_State = CHARA_STATE::MOVE;
 		}
 	}
-	else if (keyboard::Button(keyboard::KEY_ID::D))
+	else if (Button(keyboard::KEY_ID::D))
 	{
 		m_Chara_Direction = CHARA_DIRECTION::RIGHT;
 
@@ -97,7 +127,7 @@ void CProtagonist::WaitCharacter()
 			m_Chara_State = CHARA_STATE::MOVE;
 		}
 	}
-	else if (keyboard::Button(keyboard::KEY_ID::A))
+	else if (Button(keyboard::KEY_ID::A))
 	{
 		m_Chara_Direction = CHARA_DIRECTION::LEFT;
 
@@ -108,7 +138,6 @@ void CProtagonist::WaitCharacter()
 			m_Chara_State = CHARA_STATE::MOVE;
 		}
 	}
-		
 }
 
 void CProtagonist::MoveCharacter()

@@ -6,9 +6,7 @@
 class CProtagonist 
 {
 public:
-	CProtagonist(void);
-	~CProtagonist(void) = default;
-
+	
 	void Initialize(void);
 
 	void Update(void);
@@ -16,11 +14,23 @@ public:
 	void Draw(void);
 
 	void Finalize(void);
+	void SetChangePosition1();
+	void SetChangePosition2();
+	void SetChangePosition3();
+	void SetChangePosition4();
+	void SetBackPosition();
 	void WaitCharacter();
 	void MoveCharacter();
 	vivid::Vector2 GetCharaPos();
 	static CProtagonist& GetInstance();
 private:
+	CProtagonist(void);
+	//コピーコンストラクタ
+	CProtagonist(const CProtagonist& rhp) = delete;
+
+	CProtagonist& operator=(const CProtagonist& rhp) = delete;
+
+	~CProtagonist(void) = default;
 
 	enum class CHARA_DIRECTION
 	{

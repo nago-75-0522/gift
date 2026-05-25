@@ -1,3 +1,4 @@
+//森
 #include"forest.h"
 #include"../../../character/protagonist/protagonist.h"
 #include"../forest_manager.h"
@@ -51,7 +52,7 @@ void CForest::Initialize(void)
 	for (int i = 0, k = 0; i < size; ++i)
 	{
 		//文字の０～３であれば、数値に変換する
-		if (buf[i] >= '0' && buf[i] <= '4')
+		if (buf[i] >= '0' && buf[i] <= '6')
 		{
 			char t = buf[i];
 
@@ -69,13 +70,34 @@ void CForest::Initialize(void)
 
 void CForest::Update(void)
 {
+	namespace keyboard = vivid::keyboard;
 	int x = (int)((CProtagonist::GetInstance().GetCharaPos().x + 0.5f) / (float)m_map_chip_size);
 	int y = (int)((CProtagonist::GetInstance().GetCharaPos().y + 0.5f) / (float)m_map_chip_size);
 
-	if (CheckChangeOver(x, y) && vivid::keyboard::Button(vivid::keyboard::KEY_ID::D))
+
+	if (CheckChangeOver1(x, y) &&Button(vivid::keyboard::KEY_ID::W))
+	{
+	}
+
+	if (CheckChangeOver2(x, y) && Button(vivid::keyboard::KEY_ID::D))
 	{
 		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST2);
+	}
+	
+	if (CheckChangeOver3(x, y) && Button(vivid::keyboard::KEY_ID::S))
+	{
+		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST3);
+	}
+	if (CheckChangeOver4(x, y) && Button(vivid::keyboard::KEY_ID::A))
+	{
+	}
 
+	if (CheckBack(x, y))
+	{
+		if( vivid::keyboard::Button(vivid::keyboard::KEY_ID::A))
+		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST1);
+		else if( vivid::keyboard::Button(vivid::keyboard::KEY_ID::W))
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST2);
 	}
 	CForest_Manager::GetInstance().Update();
 }
@@ -141,7 +163,7 @@ void CForest::Fopen(void)
 	for (int i = 0, k = 0; i < size; ++i)
 	{
 		//文字の０～4であれば、数値に変換する
-		if (buf[i] >= '0' && buf[i] <= '4')
+		if (buf[i] >= '0' && buf[i] <= '6')
 		{
 			char t = buf[i];
 
@@ -157,13 +179,80 @@ void CForest::Fopen(void)
 	delete[] buf;
 }
 
-vivid::Vector2 CForest::GetStartPos(void)
+
+vivid::Vector2 CForest::GetBack()
 {
 	for (int i = 0; i < m_map_chip_count_height; ++i)
 	{
 		for (int k = 0; k < m_map_chip_count_width; ++k)
 		{
-			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::START_FLAG)
+			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Back_Space)
+			{
+				return {
+					(float)(k * m_map_chip_size),
+					(float)(i * m_map_chip_size)
+				};
+			}
+		}
+	}
+}
+
+vivid::Vector2 CForest::GetChange1()
+{
+	for (int i = 0; i < m_map_chip_count_height; ++i)
+	{
+		for (int k = 0; k < m_map_chip_count_width; ++k)
+		{
+			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over1)
+			{
+				return {
+					(float)(k * m_map_chip_size),
+					(float)(i * m_map_chip_size)
+				};
+			}
+		}
+	}
+}
+vivid::Vector2 CForest::GetChange2()
+{
+	for (int i = 0; i < m_map_chip_count_height; ++i)
+	{
+		for (int k = 0; k < m_map_chip_count_width; ++k)
+		{
+			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over2)
+			{
+				return {
+					(float)(k * m_map_chip_size),
+					(float)(i * m_map_chip_size)
+				};
+			}
+		}
+	}
+}
+vivid::Vector2 CForest::GetChange3()
+{
+	for (int i = 0; i < m_map_chip_count_height; ++i)
+	{
+		for (int k = 0; k < m_map_chip_count_width; ++k)
+		{
+			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over3)
+			{
+				return {
+					(float)(k * m_map_chip_size),
+					(float)(i * m_map_chip_size)
+				};
+			}
+		}
+	}
+}
+
+vivid::Vector2 CForest::GetChange4()
+{
+	for (int i = 0; i < m_map_chip_count_height; ++i)
+	{
+		for (int k = 0; k < m_map_chip_count_width; ++k)
+		{
+			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over4)
 			{
 				return {
 					(float)(k * m_map_chip_size),
@@ -201,9 +290,25 @@ bool CForest::CheckWall(int x, int y)
 	return false;
 }
 
+bool CForest::CheckBack(int x, int y)
+{
+	if (x < 0)
+		x = 0;
+	if (x > m_map_chip_count_width)
+		x = m_map_chip_count_width - 1;
+	if (y < 0)
+		y = 0;
+	if (y > m_map_chip_count_height)
+		y = m_map_chip_count_height - 1;
+
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Back_Space)
+		return true;
+	return false;
+}
 
 
-bool CForest::CheckChangeOver(int x, int y)
+
+bool CForest::CheckChangeOver1(int x, int y)
 {
 	
 	if (x < 0)
@@ -216,11 +321,67 @@ bool CForest::CheckChangeOver(int x, int y)
 		y = m_map_chip_count_height - 1;
 
 
-	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over)
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over1)
 	  return true;
 
 	return false;
 }
+
+bool CForest::CheckChangeOver2(int x, int y)
+{
+	
+	if (x < 0)
+		x = 0;
+	if (x > m_map_chip_count_width)
+		x = m_map_chip_count_width - 1;
+	if (y < 0)
+		y = 0;
+	if (y > m_map_chip_count_height)
+		y = m_map_chip_count_height - 1;
+
+
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over2)
+	  return true;
+
+	return false;
+}
+bool CForest::CheckChangeOver3(int x, int y)
+{
+	
+	if (x < 0)
+		x = 0;
+	if (x > m_map_chip_count_width)
+		x = m_map_chip_count_width - 1;
+	if (y < 0)
+		y = 0;
+	if (y > m_map_chip_count_height)
+		y = m_map_chip_count_height - 1;
+
+
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over3)
+	  return true;
+
+	return false;
+}
+bool CForest::CheckChangeOver4(int x, int y)
+{
+	
+	if (x < 0)
+		x = 0;
+	if (x > m_map_chip_count_width)
+		x = m_map_chip_count_width - 1;
+	if (y < 0)
+		y = 0;
+	if (y > m_map_chip_count_height)
+		y = m_map_chip_count_height - 1;
+
+
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over4)
+	  return true;
+
+	return false;
+}
+
 
 CForest& CForest::GetInstance()
 {
