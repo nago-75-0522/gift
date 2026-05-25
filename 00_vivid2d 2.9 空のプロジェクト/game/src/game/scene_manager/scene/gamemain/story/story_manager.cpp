@@ -1,6 +1,7 @@
 ﻿#include"story_manager.h"
 #include"story1/story1.h"
 #include"opning/opning.h"
+#include"..\stage\stage_manager.h"
 
 //初期値の設定
 CStory::CStory()
@@ -19,6 +20,12 @@ CStory& CStory::GetInstance()
 //初期化
 void CStory::Initialize(void)
 {
+		//毎回オープニングに初期化する
+		m_Current_StoryID = STORY_ID::OPNING;
+		m_Next_StoryID = STORY_ID::OPNING;
+
+		CStage::GetInstance().Initialize();
+
 	_ChangeStory();
 	if (m_Story)
 	{
@@ -31,6 +38,8 @@ void CStory::Initialize(void)
 //更新
 void CStory::Update(void)
 {
+
+
 	if (m_Current_StoryID != m_Next_StoryID)
 	{
 		_ChangeStory();
@@ -43,6 +52,9 @@ void CStory::Update(void)
 
 	if (m_Story)
 		m_Story->Update();
+
+	CStage::GetInstance().Update();
+
 }
 
 //描画
@@ -50,6 +62,10 @@ void CStory::Draw(void)
 {
 	if (m_Story)
 		m_Story->Draw();
+
+	CStage::GetInstance().Draw();
+
+
 }
 
 //解放
@@ -58,7 +74,7 @@ void CStory::Finalize(void)
 	
 }
 
-void CStory::Change(STORY_ID id)
+void CStory::ChangeStory(STORY_ID id)
 {
 
 	//呼び出されたシーンをいれる
@@ -82,6 +98,8 @@ void CStory::_ChangeStory()
 
 	case STORY_ID::STORY1:
 		m_Story = new CStory1();
+		CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);//インスタンスを呼び出す
+
 		break;
 	}
 }

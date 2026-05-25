@@ -14,9 +14,9 @@ void COpning::Initialize(void)
 
 void COpning::Update(void)
 {
-	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::Z))
+	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 	{
-		CStory::GetInstance().Change(STORY_ID::STORY1);
+		CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
 
 	}
 }

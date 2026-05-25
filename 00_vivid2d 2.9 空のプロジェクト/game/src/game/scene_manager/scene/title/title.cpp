@@ -1,6 +1,7 @@
 #include"title.h"
 #include"..\..\scene_manager.h"
-
+#include"..\gamemain\stage\stage_manager.h"
+#include"..\gamemain\story\story_manager.h"
 
 const vivid::Vector2 pos = { vivid::WINDOW_WIDTH / 2,(vivid::WINDOW_HEIGHT * 2) / 3 };
 
@@ -12,6 +13,9 @@ void CTitle::Initialize(void)
 	CTitle::start_logo.x = (vivid::WINDOW_WIDTH - vivid::GetTextureWidth("data\\start.png")) / 2.0f;//ｘ座標
 	CTitle::start_logo.y = (vivid::WINDOW_HEIGHT - vivid::GetTextureHeight("data\\start.png")) * 2 / 3;//ｙ座標
 
+
+	CStory::GetInstance().Initialize();  // ★ ゲーム開始時に1回だけ
+	CStage::GetInstance().Initialize();  // ★ これも1回だけ
 }
 
 //更新

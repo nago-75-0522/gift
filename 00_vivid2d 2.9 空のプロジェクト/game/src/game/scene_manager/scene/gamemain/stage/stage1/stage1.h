@@ -1,16 +1,15 @@
 #pragma once
-#include"..\story_manager.h"
-#pragma once
+#include"..\stage_manager.h"
 
-class CStory1 :public CGamemain
+class CStage1 :public CGamemain
 {
-	public:
+public:
 
 	//インスタンス呼び出す
-	static CStory1& GetInstance();
+	static CStage1& GetInstance();
 
-	CStory1(void) = default;
-	~CStory1(void) = default;
+	CStage1(void) = default;
+	~CStage1(void) = default;
 
 	void Initialize(void)override;
 	void Update(void)override;

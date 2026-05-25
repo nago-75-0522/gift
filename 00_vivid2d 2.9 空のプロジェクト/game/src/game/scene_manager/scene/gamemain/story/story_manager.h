@@ -13,6 +13,7 @@ enum class STORY_ID
 //親クラスはCGamemain
 class CStory :public CGamemain
 {
+
 public:
 	void Initialize(void)override;
 	void Update(void)override;
@@ -24,18 +25,20 @@ public:
 	static CStory& GetInstance();
 
 	//storyの切り替え
-	void Change(STORY_ID id);
-
+	void ChangeStory(STORY_ID id);
 	void _ChangeStory();
-
-	//ストーリー分岐
-	void Opning(void);
-
-	void Story1(void);
 		
 	IScene* m_Story;
 	STORY_ID m_Current_StoryID;//現在のシーンID
 	STORY_ID m_Next_StoryID;//次のシーン
+	//ストーリーからステージに行くかどうか trueで切り替え
+	bool m_RequestStage = false;
+
+
+	void CStory::RequestStage() { m_RequestStage = true; }
+	bool CStory::IsStageRequested() const { return m_RequestStage; }
+	void CStory::ClearStageRequest() { m_RequestStage = false; }
+
 
 private:
 
