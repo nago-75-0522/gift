@@ -122,11 +122,35 @@ void CGamemain::Finalize(void)
 
 void CGamemain::Menu(void)
 {
-	//コントローラーの設定
-	
+	/* コントローラーの実装 */
+	//デッドゾーンの設定
+	const float DEAD_ZONE = 0.7f;
+
+	//前フレームのスティックXを保持
+	static float prev_stick_x = 0.0f;
+
+	//左スティック入力取得
+	vivid::Vector2 m_stick = vivid::controller::GetAnalogStickLeft(vivid::controller::DEVICE_ID::PLAYER1);
+
+	//右に倒した瞬間（前フレームはデッドゾーン内、現在のフレームは超えた）
+	if (prev_stick_x <= DEAD_ZONE && m_stick.x > DEAD_ZONE)
+	{
+		m_Now_Select = (SELECT_BUTTON)(((int)m_Now_Select + 1) % (int)SELECT_BUTTON::MAX);
+		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
+	}
+
+	// 左に倒した瞬間
+	else if (prev_stick_x >= -DEAD_ZONE && m_stick.x < -DEAD_ZONE)
+	{
+		m_Now_Select = (SELECT_BUTTON)((((int)m_Now_Select - 1) + (int)SELECT_BUTTON::MAX) % (int)SELECT_BUTTON::MAX);
+		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
+	}
+
+	// 現在の値を保存
+	prev_stick_x = m_stick.x;
 
 
-	/* 十字キー設定 */
+	/* 十字キー実装 */
 	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1,vivid::controller::BUTTON_ID::RIGHT))
 	{
 		//選択ボタンの変更
@@ -144,8 +168,9 @@ void CGamemain::Menu(void)
 
 		//指の位置変更
 		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
-
+		
 	}
+	
 
 
 	/* 選択中 */
@@ -176,7 +201,7 @@ void CGamemain::Menu(void)
 void CGamemain::DrawMenu(void)
 {
 	vivid::DrawTexture("data\\t_bg.png", { 0,0 });
-	vivid::DrawText(48, "menu", { vivid::WINDOW_WIDTH / 2 - 100,0 }, 0xfffffffff);
+	vivid::DrawText(48, "menu", { vivid::WINDOW_WIDTH / 2 - 100,0 }, 0xffffffff);
 	vivid::DrawTexture("data\\arrow.png", m_Finger_Position);
 
 	for (int i = 0; i < (int)SELECT_BUTTON::MAX; i++)
