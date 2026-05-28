@@ -2,17 +2,6 @@
 #include"..\gamemain.h"
 #include "../../scene.h"
 
-//stage状態
-enum class STAGE_ID//ステージ
-{
-	//切り替えるシーン
-	STAGE1,		//花畑
-	STAGE2,		//海岸
-	STAGE3,		//森
-	STAGE4,		//町
-	STAGE5,		//お城内
-
-};
 //親クラスはCGamemain
 class CStage :public CGamemain
 {
@@ -26,6 +15,22 @@ public:
 	//インスタンス呼び出す
 	static CStage& GetInstance();
 
+
+private:
+
+	//stage状態
+	enum class STAGE_ID//ステージ
+	{
+		//切り替えるシーン
+		STAGE1,		//花畑
+		STAGE2,		//海岸
+		STAGE3,		//森
+		STAGE4,		//町
+		STAGE5,		//お城内
+
+	};
+
+
 	//STAGEの切り替え
 	void ChangeStage(STAGE_ID id);
 
@@ -37,8 +42,6 @@ public:
 
 	bool m_IsStoryMode = false;//ステージモードかどうか
 
-
-private:
 
 	//コンストラクタ
 	CStage(); //なにもしない
