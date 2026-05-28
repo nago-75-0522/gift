@@ -28,76 +28,93 @@ void CGamemain::Initialize(void)
 	//矢印yは選択中ボタンの高さと変わらないため
 	m_Finger_Position.y = m_Button_y;									//指のy座標の初期化
 
+	vivid::Vector2 m_Stic = vivid::controller::GetAnalogStickLeft(vivid::controller::DEVICE_ID::PLAYER1);//スティック
+
 }
 
 //更新
 void CGamemain::Update(void)
 {
-		switch (m_Now_GameState)
+	switch (m_Now_GameState)
+	{
+		//MENU
+	case GAME_STATE::MENU:
+		Menu();
+
+		if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 		{
-			//MENU
-		case GAME_STATE::MENU:
-			Menu();
+			if (m_Now_Select == SELECT_BUTTON::START)
+				CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
 
-			if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
+			else//続きからの場合の処理(セーブファイルに飛ぶようにする)
+				CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
 			{
-				if (m_Now_Select == SELECT_BUTTON::START)
-					CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
-				else
-					CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
-
-				m_Now_GameState = GAME_STATE::STORY;
+				/* セーブへの移行 */
 			}
-			break;
-
-
 			
-			// STORY
-		case GAME_STATE::STORY:
-			CStory::GetInstance().Update();
-			//Story側がStageに行きたいときにtrueにする
-			if (CStory::GetInstance().m_RequestStage == true)
-			{
-				CStory::GetInstance().m_RequestStage = false;
-				m_Now_GameState = GAME_STATE::STAGE;
-			}
-		
-			break;
-
-
-			
-			//STAGE
-		case GAME_STATE::STAGE:
-			CStage::GetInstance().Update();
-			break;
+				m_Now_GameState = GAME_STATE::STORY;//ストーリーモードにする
 		}
+
+
+		if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
+		{
+			if (m_Now_Select == SELECT_BUTTON::START)
+				CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
+			else
+				CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
+
+			m_Now_GameState = GAME_STATE::STORY;//ストーリーモード
+		}
+		break;
+
+
+
+		// STORY
+	case GAME_STATE::STORY:
+		CStory::GetInstance().Update();
+
+		//Story側がStageに行きたいときにtrueにする
+		if (CStory::GetInstance().m_RequestStage == true)
+		{
+			CStory::GetInstance().m_RequestStage = false;
+			m_Now_GameState = GAME_STATE::STAGE;//ステージモード
+		}
+
+		break;
+
+
+		//STAGE
+	case GAME_STATE::STAGE:
+		CStage::GetInstance().Update();
+		break;
 	}
+}
 
 void CGamemain::Draw(void)
 {
-		switch (m_Now_GameState)
-		{
-			
-			//MENU
-		case GAME_STATE::MENU:
-			CGamemain::DrawMenu();
-		
-			break;
+	switch (m_Now_GameState)
+	{
+
+		//MENU
+	case GAME_STATE::MENU:
+		CGamemain::DrawMenu();
+
+		break;
 
 
-			//STORY
+		//STORY
 
-		case GAME_STATE::STORY:
-			CStory::GetInstance().Draw();
-			break;
+	case GAME_STATE::STORY:
+		CStory::GetInstance().Draw();
+		break;
 
 
-			// STAGE
-		case GAME_STATE::STAGE:
-			CStage::GetInstance().Draw();
-			break;
-		}
+		// STAGE
+	case GAME_STATE::STAGE:
+		CStage::GetInstance().Draw();
+		break;
 	}
+}
 
 void CGamemain::Finalize(void)
 {
@@ -105,30 +122,55 @@ void CGamemain::Finalize(void)
 
 void CGamemain::Menu(void)
 {
+	//コントローラーの設定
 	
-		/* 選択中 */
-		if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::RIGHT))
-		{
-			//選択ボタンの変更
-			m_Now_Select = (SELECT_BUTTON)(((int)m_Now_Select + 1) % (int)SELECT_BUTTON::MAX);
 
-			//指の位置変更
-			m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
 
-		}
+	/* 十字キー設定 */
+	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1,vivid::controller::BUTTON_ID::RIGHT))
+	{
+		//選択ボタンの変更
+		m_Now_Select = (SELECT_BUTTON)(((int)m_Now_Select + 1) % (int)SELECT_BUTTON::MAX);
 
-		else if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::LEFT))
-		{
-			//選択ボタンの変更
-			m_Now_Select = (SELECT_BUTTON)((((int)m_Now_Select - 1) + (int)SELECT_BUTTON::MAX) % (int)SELECT_BUTTON::MAX);
+		//指の位置変更
+		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
 
-			//指の位置変更
-			m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
+	}
 
-		}
+	else if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1,vivid::controller::BUTTON_ID::LEFT))
+	{
+		//選択ボタンの変更
+		m_Now_Select = (SELECT_BUTTON)((((int)m_Now_Select - 1) + (int)SELECT_BUTTON::MAX) % (int)SELECT_BUTTON::MAX);
 
-		
-	
+		//指の位置変更
+		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
+
+	}
+
+
+	/* 選択中 */
+	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::RIGHT))
+	{
+		//選択ボタンの変更
+		m_Now_Select = (SELECT_BUTTON)(((int)m_Now_Select + 1) % (int)SELECT_BUTTON::MAX);
+
+		//指の位置変更
+		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
+
+	}
+
+	else if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::LEFT))
+	{
+		//選択ボタンの変更
+		m_Now_Select = (SELECT_BUTTON)((((int)m_Now_Select - 1) + (int)SELECT_BUTTON::MAX) % (int)SELECT_BUTTON::MAX);
+
+		//指の位置変更
+		m_Finger_Position = vivid::Vector2(m_Button_x[(int)m_Now_Select] - m_Finger_Width, m_Button_y);
+
+	}
+
+
+
 }
 
 void CGamemain::DrawMenu(void)

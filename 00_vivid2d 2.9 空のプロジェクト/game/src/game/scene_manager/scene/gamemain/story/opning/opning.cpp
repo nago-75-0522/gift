@@ -15,7 +15,14 @@ void COpning::Initialize(void)
 
 void COpning::Update(void)
 {
+	//キーボード用
 	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
+	{
+		CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
+	}
+	
+	//コントローラー
+	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 	{
 		CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
 	}

@@ -4,7 +4,7 @@
 
 class CStory1 :public CGamemain
 {
-	public:
+public:
 
 	//インスタンス呼び出す
 	static CStory1& GetInstance();
