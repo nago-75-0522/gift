@@ -1,14 +1,12 @@
 #include"gamemain.h"
 #include"vivid.h"
 #include"story/story_manager.h"
-<<<<<<< Updated upstream
 #include"stage/stage_manager.h"
-=======
-#include"../../../object/map/forest_maneger/forest/forest.h"
+#include"../../../object/map/forest_manager/forest/forest.h"
 #include"../../../object/character/protagonist/protagonist.h"
 #include"../../../object/timer/timer.h"
 
->>>>>>> Stashed changes
+
 //はじめからか続きからを選択
 //初めからの場合はプロローグ　続きからならセーブしているステージからスタート
 
