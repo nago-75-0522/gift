@@ -1,6 +1,7 @@
 #include"stage1.h"
 #include"vivid.h"
 #include"..\..\story\story_manager.h"
+#include"..\..\..\..\scene_manager.h"
 
 CStage1& CStage1::GetInstance()
 {
@@ -19,9 +20,18 @@ void CStage1::Update(void)
     {
 
         CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
-        //GameMainにステージへ行きたいと知らせる
+        //GameMainにストーリーへ行きたいと知らせる
         CStory::GetInstance().m_RequestStage = true;
     }
+
+#if 1
+    if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
+    {
+        //いったんタイトル戻る
+        CSceneManager::GetInstance().Change(SCENE_ID::TITLE);
+    }
+
+#endif 1
 }
 
 void CStage1::Draw(void)

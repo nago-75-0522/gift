@@ -1,5 +1,9 @@
+
+/*
+
 #include"fade.h"
 #include"vivid.h"
+
 
 //定数
 const float Fade::m_Alpha = 255.0f;		//透明度
@@ -31,15 +35,16 @@ void Fade::Draw(void)
 //フェードイン　透明から黒
 void Fade::FadeIn(void)
 {
-	/*m_Fade_State = FADE_STATE::FADE_OUT;
+	m_Fade_State = FADE_STATE::FADE_OUT;
 	m_Alpha = 0.0f;    // 最初は透明
-	*/
+	
 }
 
 //フェードアウト　黒から透明
 void Fade::FadeOut(void)
 {
-	/*m_Fade_State = FADE_STATE::FADE_IN;
+	m_Fade_State = FADE_STATE::FADE_IN;
 	m_Alpha = 255.0f;  // 最初は真っ黒
-	*/
-	
+
+
+*/

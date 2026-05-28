@@ -2,6 +2,13 @@
 #include"..\gamemain.h"
 #include "../../scene.h"
 
+//story状態
+enum class STORY_ID
+{
+	OPNING,	//オープニング
+	STORY1,//ステージ１のストーリー
+	ENDING,//エンディング
+};
 
 //親クラスはCGamemain
 class CStory :public CGamemain
@@ -13,19 +20,9 @@ public:
 	void Draw(void)override;
 	void Finalize(void)override;
 
+
 	//インスタンス呼び出す
 	static CStory& GetInstance();
-
-
-private:
-
-	//story状態
-	enum class STORY_ID
-	{
-		OPNING,	//オープニング
-		STORY1,//ステージ１のストーリー
-		ENDING,//エンディング
-	};
 
 	//storyの切り替え
 	void ChangeStory(STORY_ID id);
@@ -41,6 +38,9 @@ private:
 	void CStory::RequestStage() { m_RequestStage = true; }
 	bool CStory::IsStageRequested() const { return m_RequestStage; }
 	void CStory::ClearStageRequest() { m_RequestStage = false; }
+
+
+private:
 
 	//コンストラクタ
 	CStory(); //なにもしない

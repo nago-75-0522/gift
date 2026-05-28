@@ -14,23 +14,24 @@ void CTitle::Initialize(void)
 	CTitle::start_logo.y = (vivid::WINDOW_HEIGHT - vivid::GetTextureHeight("data\\start.png")) * 2 / 3;//ｙ座標
 
 
-	CStory::GetInstance().Initialize();  // ★ ゲーム開始時に1回だけ
-	CStage::GetInstance().Initialize();  // ★ これも1回だけ
+	CStory::GetInstance().Initialize();  //ゲーム開始時に1回だけ
+	CStage::GetInstance().Initialize();  //これも1回だけ
 }
 
 //更新
 void CTitle::Update(void)
 {
 	
-	
+	//キーボード用
 	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::SPACE))
 	{
 	
 		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
-
-#if _DEBUG		
-#endif
-
+	}
+	//コントローラー用
+	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
+	{
+		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
 	}
 }
 

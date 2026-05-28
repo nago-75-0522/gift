@@ -1,3 +1,5 @@
+/*
+
 #pragma once
 //フェード処理のクラス
 class Fade
@@ -35,3 +37,5 @@ private:
 
 
 };
+
+*/

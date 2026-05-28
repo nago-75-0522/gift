@@ -20,9 +20,9 @@ CStory& CStory::GetInstance()
 //初期化
 void CStory::Initialize(void)
 {
-		//毎回オープニングに初期化する
-		m_Current_StoryID = STORY_ID::OPNING;
-		m_Next_StoryID = STORY_ID::OPNING;
+	//毎回オープニングに初期化する
+	m_Current_StoryID = STORY_ID::OPNING;
+	m_Next_StoryID = STORY_ID::OPNING;
 
 	_ChangeStory();
 	if (m_Story)
@@ -65,7 +65,7 @@ void CStory::Draw(void)
 //解放
 void CStory::Finalize(void)
 {
-	
+
 }
 
 void CStory::ChangeStory(STORY_ID id)
