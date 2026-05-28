@@ -47,7 +47,7 @@ private:
 		Change_Over4,//下
 		Back_Space
 	};
-	MAP_CHIP_ID map_chip;
+	MAP_CHIP_ID m_Map_Chip;
 	//定数
 
 	static const int m_map_chip_size;
@@ -55,5 +55,5 @@ private:
 	static const int m_map_chip_count_height;
 		
 	
-	FOREST_ID forest_id;
+	FOREST_ID m_Forest_ID;
 };

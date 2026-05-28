@@ -10,9 +10,9 @@ CForest_Manager::CForest_Manager()
 void CForest_Manager::Initialize()
 {
 	ChangeForest(FOREST_ID::FOREST1);
-	m_f_csv = "data/forest/forest1.csv";
-	m_state_1 = true;
-	m_state_2 = true;
+	m_F_Csv = "data/forest/forest1.csv";
+	m_State_1 = true;
+	m_State_2 = true;
 }
 
 void CForest_Manager::Update()
@@ -26,25 +26,25 @@ void CForest_Manager::Update()
 		case FOREST_ID::DUMMY:
 			break;
 		case FOREST_ID::FOREST1:
-			m_f_csv = "data/forest/forest1.csv";
+			m_F_Csv = "data/forest/forest1.csv";
 			CForest::GetInstance().Fopen();
-			if (m_state_1 == true)
+			if (m_State_1 == true)
 			{
 				CProtagonist::GetInstance().Initialize();
 			}
 			else 
 			{	
-				m_state_2 = true;
+				m_State_2 = true;
 				CProtagonist::GetInstance().SetChangePosition2();
 			}
 			
 			break;
 		case FOREST_ID::FOREST2:
-			m_f_csv = "data/forest/forest2.csv";
+			m_F_Csv = "data/forest/forest2.csv";
 			CForest::GetInstance().Fopen();
-			if (m_state_2 == true)
+			if (m_State_2 == true)
 			{
-				m_state_1 = false;
+				m_State_1 = false;
 				CProtagonist::GetInstance().SetBackPosition();
 			}
 			else
@@ -54,9 +54,9 @@ void CForest_Manager::Update()
 			
 			break;
 		case FOREST_ID::FOREST3:
-			m_f_csv = "data/forest/forest3.csv";
+			m_F_Csv = "data/forest/forest3.csv";
 			CForest::GetInstance().Fopen();
-			m_state_2 = false;
+			m_State_2 = false;
 			CProtagonist::GetInstance().SetBackPosition();
 			break;
 		default:
@@ -86,5 +86,5 @@ CForest_Manager& CForest_Manager::GetInstance()
 
 const char* CForest_Manager::GetMapName()
 {
-	return m_f_csv;
+	return m_F_Csv;
 }

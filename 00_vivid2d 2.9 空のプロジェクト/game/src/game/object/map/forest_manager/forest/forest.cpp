@@ -7,9 +7,9 @@ const int CForest::m_map_chip_size = 64;
 const int CForest::m_map_chip_count_width= vivid::WINDOW_WIDTH / m_map_chip_size;
 const int CForest::m_map_chip_count_height = vivid::WINDOW_HEIGHT / m_map_chip_size+1;
 
-constexpr int width = 64;
-constexpr int height=64;
-unsigned char m_Map[height][width];
+constexpr int g_Width = 64;
+constexpr int g_Height=64;
+unsigned char m_Map[g_Height][g_Width];
 
 
 CForest::CForest(void)
