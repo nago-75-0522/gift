@@ -1,4 +1,7 @@
 ﻿#include "scene_manager.h"
+#include"scene/gamemain/gamemain.h"
+#include"scene/title/title.h"
+#include"scene/save/save.h"
 
 CSceneManager::CSceneManager()
 	:m_Scene(nullptr)
@@ -75,8 +78,9 @@ void CSceneManager::_ChangeScene()
 	case SCENE_ID::GAMEMAIN:
 		m_Scene = new CGamemain();
 		break;
-		//case SCENE_ID::SAVE:
-			//break;
+		case SCENE_ID::SAVE:
+			m_Scene = new CSave;
+			break;
 	default:
 		break;
 	}

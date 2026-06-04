@@ -2,6 +2,7 @@
 #include"vivid.h"
 #include"story/story_manager.h"
 #include"stage/stage_manager.h"
+#include"..\..\scene_manager.h"
 //はじめからか続きからを選択
 //初めからの場合はプロローグ　続きからならセーブしているステージからスタート
 
@@ -44,26 +45,33 @@ void CGamemain::Update(void)
 		if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 		{
 			if (m_Now_Select == SELECT_BUTTON::START)
-				CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
-
-			else//続きからの場合の処理(セーブファイルに飛ぶようにする)
-				CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
 			{
-				/* セーブへの移行 */
+				CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
+				m_Now_GameState = GAME_STATE::STORY;//ストーリーモードにする
 			}
 			
-				m_Now_GameState = GAME_STATE::STORY;//ストーリーモードにする
+			else
+			{
+				//続きからの場合の処理(セーブファイルに飛ぶようにする)
+				CSceneManager::GetInstance().Change(SCENE_ID::SAVE);
+			}
+			
 		}
 
 
 		if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 		{
 			if (m_Now_Select == SELECT_BUTTON::START)
+			{
 				CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
-			else
-				CStory::GetInstance().ChangeStory(STORY_ID::STORY1);
+				m_Now_GameState = GAME_STATE::STORY;//ストーリーモードにする
+			}
 
-			m_Now_GameState = GAME_STATE::STORY;//ストーリーモード
+			else
+			{
+				//続きからの場合の処理(セーブファイルに飛ぶようにする)
+				CSceneManager::GetInstance().Change(SCENE_ID::SAVE);
+			}
 		}
 		break;
 
@@ -103,7 +111,6 @@ void CGamemain::Draw(void)
 
 
 		//STORY
-
 	case GAME_STATE::STORY:
 		CStory::GetInstance().Draw();
 		break;

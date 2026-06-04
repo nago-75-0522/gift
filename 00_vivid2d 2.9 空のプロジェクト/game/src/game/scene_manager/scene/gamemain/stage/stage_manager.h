@@ -11,7 +11,7 @@ enum class STAGE_ID//ステージ
 	STAGE3,		//森
 	STAGE4,		//町
 	STAGE5,		//お城内
-
+	MAX,		//最大値
 };
 //親クラスはCGamemain
 class CStage :public CGamemain

@@ -1,5 +1,6 @@
 #pragma once
 #include"..\scene.h"
+#include"vivid.h"
 
 class CGamemain :public IScene
 {

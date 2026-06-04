@@ -1,5 +1,5 @@
 #pragma once
-#include"vivid.h"
+
 
 //基底クラス(親)
 class IScene//Iはインターフェース 

@@ -1,6 +1,6 @@
 #pragma once
 #include"..\scene.h"
-#include <vivid.h>
+#include "vivid.h"
 
 
 class CTitle :public IScene
