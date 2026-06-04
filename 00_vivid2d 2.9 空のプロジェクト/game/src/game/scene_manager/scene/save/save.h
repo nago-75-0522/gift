@@ -7,6 +7,10 @@
 class CSave :public IScene
 {
 public:
+
+	//インスタンス呼び出す
+	static CSave& GetInstance();
+
 	//初期化
 	void Initialize(void)override;//多重定義
 	//更新
@@ -23,10 +27,6 @@ public:
 	~CSave(void) = default;//デストラクタ
 
 private:
-
-
-	
-
 	static const vivid::Vector2 m_BG_Position;						//タイトル画面の画像位置
 	static const int m_Finger_Width;								//選択印(指)の幅
 	static const std::string m_Button_Image[(int)STAGE_ID::MAX];//ボタン画像名

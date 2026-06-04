@@ -1,6 +1,4 @@
 #pragma once
-#include"scene.h"
-#include"vivid.h"
 
 enum class SCENE_ID//列挙型
 {
@@ -9,4 +7,5 @@ enum class SCENE_ID//列挙型
 	GAMEMAIN,	//ゲームメイン
 	SAVE,		//セーブデータ
 	INVENTORY,	//インベントリ
+	STAGE,		//ステージ
 };

@@ -19,15 +19,13 @@ void CStory1::Update(void)
 	//キーボード
 	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 	{
-		CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
-		CStory::GetInstance().m_RequestStage = true;
+	
 	}
 
 	//コントローラー
 	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 	{
-		CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
-		CStory::GetInstance().m_RequestStage = true;
+		
 	}
 
 }
