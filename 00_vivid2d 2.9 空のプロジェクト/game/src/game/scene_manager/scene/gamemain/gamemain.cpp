@@ -3,6 +3,7 @@
 #include"story/story_manager.h"
 #include"stage/stage_manager.h"
 #include"..\..\scene_manager.h"
+#include"..\save\save.h"
 //はじめからか続きからを選択
 //初めからの場合はプロローグ　続きからならセーブしているステージからスタート
 
@@ -15,13 +16,24 @@ const std::string CGamemain::m_Button_Image[] = { "data\\first.png","data\\secon
 const unsigned int CGamemain::m_Select_Button_Color(0xffffffff);
 
 
+CGamemain& CGamemain::GetInstance()
+{
+	static CGamemain instance;//CSceneManager型のインスタンスの作成
+	return instance;//インスタンスを返す
+}
+
+//コンストラクタ
+CGamemain::CGamemain()
+	:m_Now_GameState (GAME_STATE::MENU)  //最初にメニューを表示
+{
+}
+
 
 //親クラスの作成
 //初期化
 void CGamemain::Initialize(void)
 {
 	m_Now_Select = SELECT_BUTTON::START;
-	m_Now_GameState = GAME_STATE::MENU;
 
 	m_Button_Position = vivid::Vector2::ZERO;//位置
 	//ｘは配列に合わせるため
@@ -33,6 +45,8 @@ void CGamemain::Initialize(void)
 
 }
 
+
+
 //更新
 void CGamemain::Update(void)
 {
@@ -42,23 +56,24 @@ void CGamemain::Update(void)
 	case GAME_STATE::MENU:
 		Menu();
 
+		/* キーボード用 */
 		if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 		{
-			if (m_Now_Select == SELECT_BUTTON::START)
+			if(m_Now_Select == SELECT_BUTTON::START)
 			{
 				CStory::GetInstance().ChangeStory(STORY_ID::OPNING);
 				m_Now_GameState = GAME_STATE::STORY;//ストーリーモードにする
 			}
-			
+
 			else
 			{
 				//続きからの場合の処理(セーブファイルに飛ぶようにする)
 				CSceneManager::GetInstance().Change(SCENE_ID::SAVE);
+				m_Now_GameState = GAME_STATE::SAVE;//セーブモードにする
 			}
-			
 		}
 
-
+		/* コントローラ用 */
 		if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 		{
 			if (m_Now_Select == SELECT_BUTTON::START)
@@ -71,6 +86,8 @@ void CGamemain::Update(void)
 			{
 				//続きからの場合の処理(セーブファイルに飛ぶようにする)
 				CSceneManager::GetInstance().Change(SCENE_ID::SAVE);
+				m_Now_GameState = GAME_STATE::SAVE;//セーブモードにする
+
 			}
 		}
 		break;
@@ -95,6 +112,15 @@ void CGamemain::Update(void)
 	case GAME_STATE::STAGE:
 		CStage::GetInstance().Update();
 		break;
+
+
+	case GAME_STATE::SAVE:
+		CSave::GetInstance().Update();
+		break;
+
+
+
+
 	}
 }
 
@@ -120,6 +146,12 @@ void CGamemain::Draw(void)
 	case GAME_STATE::STAGE:
 		CStage::GetInstance().Draw();
 		break;
+
+		//SAVE
+	case GAME_STATE::SAVE:
+		CSave::GetInstance().Draw();
+		break;
+
 	}
 }
 
@@ -220,4 +252,10 @@ void CGamemain::DrawMenu(void)
 		else
 			vivid::DrawTexture(m_Button_Image[i], m_Button_Position);
 	}
+}
+
+//セーブからステージにセットする用
+void CGamemain::SetGameState(GAME_STATE state)
+{
+	m_Now_GameState = state;
 }

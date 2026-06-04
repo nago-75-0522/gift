@@ -16,6 +16,7 @@ void CTitle::Initialize(void)
 
 	CStory::GetInstance().Initialize();  //ゲーム開始時に1回だけ
 	CStage::GetInstance().Initialize();
+
 }
 
 //更新

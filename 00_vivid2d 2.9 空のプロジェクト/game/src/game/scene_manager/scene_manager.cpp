@@ -2,6 +2,7 @@
 #include"scene/gamemain/gamemain.h"
 #include"scene/title/title.h"
 #include"scene/save/save.h"
+#include"scene/gamemain/stage/stage_manager.h"
 
 CSceneManager::CSceneManager()
 	:m_Scene(nullptr)
@@ -69,7 +70,7 @@ void CSceneManager::_ChangeScene()
 	delete m_Scene;
 	m_Scene = nullptr;
 
-	//セーブは使う場合
+	
 	switch (m_NextID)
 	{
 	case SCENE_ID::TITLE:
@@ -78,9 +79,13 @@ void CSceneManager::_ChangeScene()
 	case SCENE_ID::GAMEMAIN:
 		m_Scene = new CGamemain();
 		break;
-		case SCENE_ID::SAVE:
-			m_Scene = new CSave;
-			break;
+	case SCENE_ID::SAVE:
+		m_Scene = new CSave;
+		break;
+	case SCENE_ID::STAGE:
+		m_Scene = new CStage();
+		break;
+
 	default:
 		break;
 	}

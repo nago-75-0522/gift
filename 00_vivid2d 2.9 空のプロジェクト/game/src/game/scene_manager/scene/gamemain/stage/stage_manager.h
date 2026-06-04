@@ -13,6 +13,7 @@ enum class STAGE_ID//ステージ
 	STAGE5,		//お城内
 	MAX,		//最大値
 };
+
 //親クラスはCGamemain
 class CStage :public CGamemain
 {
@@ -25,6 +26,12 @@ public:
 
 	//インスタンス呼び出す
 	static CStage& GetInstance();
+	//コンストラクタ
+	CStage(); //なにもしない
+
+	//デストラクタ
+	~CStage() = default;
+
 
 	//STAGEの切り替え
 	void ChangeStage(STAGE_ID id);
@@ -40,12 +47,7 @@ public:
 
 private:
 
-	//コンストラクタ
-	CStage(); //なにもしない
-
-	//デストラクタ
-	~CStage() = default;
-
+	
 	//どこからでも呼び出せるようにする
 	CStage(const CStage& rhs) = delete;//コピーの禁止
 	CStage& operator =(const CStage& rhs) = delete;//代入の禁止

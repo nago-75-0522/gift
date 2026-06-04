@@ -1,5 +1,7 @@
 #include "save.h"
 #include"..\gamemain\stage\stage_manager.h"
+#include"..\gamemain\gamemain.h"
+#include"..\..\scene_manager.h"
 #include"vivid.h"
 
 //save とりあえずステージを選んで飛べるようにする
@@ -14,6 +16,12 @@ const std::string CSave::m_Button_Image[] =
 
 const unsigned int CSave::m_Select_Button_Color(0xff0000cd);
 
+CSave& CSave::GetInstance()
+{
+	static CSave instance;//インスタンスの作成
+	return instance;//インスタンスを返す
+
+}
 
 
 /* 初期化 */
@@ -28,7 +36,7 @@ void CSave::Initialize(void)
 	//矢印yは選択中ボタンの高さと変わらないため
 	m_Finger_Position.y = m_Button_y;									//指のy座標の初期化
 
-	vivid::Vector2 m_Stic = vivid::controller::GetAnalogStickLeft(vivid::controller::DEVICE_ID::PLAYER1);//スティック
+	vivid::Vector2 m_Stick = vivid::controller::GetAnalogStickLeft(vivid::controller::DEVICE_ID::PLAYER1);//スティック
 
 }
 /* 更新 */
@@ -37,17 +45,29 @@ void CSave::Update(void)
 	//選択の呼び出し
 	SaveSelect();
 
+	// 選択処理
+	SaveSelect();
 
-	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
+	// SPACE または B で決定
+	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE) ||
+		vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 	{
+		
+		// ② GameMain に「今はステージモード」と伝える
+		CGamemain::GetInstance().SetGameState(CGamemain::GAME_STATE::STAGE);
+
+		// ③ STAGE シーンへ遷移（ここが最重要）
+		CSceneManager::GetInstance().Change(SCENE_ID::STAGE);
+	}
+/*
 		switch (m_Now_Select)
 		{
 		case STAGE_ID::STAGE1:
-			CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
+			
 			break;
-		case STAGE_ID::STAGE2:
-			CStage::GetInstance().ChangeStage(STAGE_ID::STAGE2);
 
+		case STAGE_ID::STAGE2:
+		
 			break;
 		case STAGE_ID::STAGE3:
 			CStage::GetInstance().ChangeStage(STAGE_ID::STAGE3);
@@ -74,7 +94,22 @@ void CSave::Update(void)
 			{
 			case STAGE_ID::STAGE1:
 				CStage::GetInstance().ChangeStage(STAGE_ID::STAGE1);
+
+
+				if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
+				{
+					// ① 選んだステージをセット
+					CStage::GetInstance().ChangeStage(m_Now_Select);
+
+					// ② GameMain に「今はステージモード」と伝える
+					CGamemain::GetInstance().SetGameState(CGamemain::GAME_STATE::STAGE);
+
+					// ③ GameMain シーンへ戻る
+					CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
+				}
+
 				break;
+
 			case STAGE_ID::STAGE2:
 				CStage::GetInstance().ChangeStage(STAGE_ID::STAGE2);
 
@@ -96,6 +131,13 @@ void CSave::Update(void)
 			default:
 				break;
 			}
+		}
+		*/
+
+		/* 前の画面に戻る */
+		if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::A))
+		{
+			CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);
 		}
 	
 }

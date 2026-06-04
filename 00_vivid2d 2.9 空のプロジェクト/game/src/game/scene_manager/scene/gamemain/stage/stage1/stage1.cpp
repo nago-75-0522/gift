@@ -5,7 +5,7 @@
 
 CStage1& CStage1::GetInstance()
 {
-	static CStage1 instance;//CSceneManager型のインスタンスの作成
+	static CStage1 instance;//インスタンスの作成
 	return instance;//インスタンスを返す
 }
 
