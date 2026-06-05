@@ -19,13 +19,21 @@ void CStory1::Update(void)
 	//キーボード
 	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 	{
-		CSceneManager::GetInstance().Change(SCENE_ID::TITLE);
+		//GameMainに「今はステージモード」と伝える
+		CGamemain::GetInstance().SetGameState(CGamemain::GAME_STATE::STORY);
+
+		//STAGEシーンへ遷移
+		CSceneManager::GetInstance().Change(SCENE_ID::STAGE);
 	}
 
 	//コントローラー
 	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 	{
-		CSceneManager::GetInstance().Change(SCENE_ID::TITLE);
+		//GameMainに今はステージモードを知らせる
+		CGamemain::GetInstance().SetGameState(CGamemain::GAME_STATE::STORY);
+
+		//STAGEシーンへ遷移
+		CSceneManager::GetInstance().Change(SCENE_ID::STAGE);
 
 	}
 

@@ -1,7 +1,6 @@
 ﻿#include"story_manager.h"
 #include"story1/story1.h"
 #include"opning/opning.h"
-#include"..\stage\stage_manager.h"
 
 //初期値の設定
 CStory::CStory()
