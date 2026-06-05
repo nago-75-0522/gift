@@ -24,7 +24,7 @@ void CTitle::Update(void)
 {
 	
 	//キーボード用
-	if (vivid::keyboard::Button(vivid::keyboard::KEY_ID::SPACE))
+	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 	{
 	
 		CSceneManager::GetInstance().Change(SCENE_ID::GAMEMAIN);

@@ -19,13 +19,14 @@ void CStory1::Update(void)
 	//キーボード
 	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE))
 	{
-	
+		CSceneManager::GetInstance().Change(SCENE_ID::TITLE);
 	}
 
 	//コントローラー
 	if (vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 	{
-		
+		CSceneManager::GetInstance().Change(SCENE_ID::TITLE);
+
 	}
 
 }
