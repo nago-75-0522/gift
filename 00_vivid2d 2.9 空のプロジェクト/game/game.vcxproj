@@ -197,6 +197,7 @@
     <ClCompile Include="src\game\scene_manager\scene\gamemain\stage\stage2\stage2.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\stage\stage_manager.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\story\opning\opning.cpp" />
+    <ClCompile Include="src\game\scene_manager\scene\gamemain\story\story2\story2.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\story\story_manager.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\gamemain\story\story1\story1.cpp" />
     <ClCompile Include="src\game\scene_manager\scene\save\save.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage2\stage2.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\stage\stage_manager.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\story\opning\opning.h" />
+    <ClInclude Include="src\game\scene_manager\scene\gamemain\story\story2\story2.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\story\story_manager.h" />
     <ClInclude Include="src\game\scene_manager\scene\gamemain\story\story1\story1.h" />
     <ClInclude Include="src\game\scene_manager\scene\save\save.h" />

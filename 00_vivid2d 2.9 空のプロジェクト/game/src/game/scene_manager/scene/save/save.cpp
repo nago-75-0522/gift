@@ -45,18 +45,15 @@ void CSave::Update(void)
 	//選択の呼び出し
 	SaveSelect();
 
-	// 選択処理
-	SaveSelect();
-
 	// SPACE または B で決定
 	if (vivid::keyboard::Trigger(vivid::keyboard::KEY_ID::SPACE) ||
 		vivid::controller::Trigger(vivid::controller::DEVICE_ID::PLAYER1, vivid::controller::BUTTON_ID::B))
 	{
 		
-		// ② GameMain に「今はステージモード」と伝える
+		//GameMain に「今はステージモード」と伝える
 		CGamemain::GetInstance().SetGameState(CGamemain::GAME_STATE::STAGE);
 
-		// ③ STAGE シーンへ遷移（ここが最重要）
+		//STAGE シーンへ遷移（ここが最重要）
 		CSceneManager::GetInstance().Change(SCENE_ID::STAGE);
 	}
 /*
