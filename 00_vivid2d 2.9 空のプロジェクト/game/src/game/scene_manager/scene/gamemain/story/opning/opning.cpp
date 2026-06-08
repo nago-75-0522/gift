@@ -20,6 +20,7 @@ COpning& COpning::GetInstance()
 //初期化
 void COpning::Initialize(void)
 {
+	//ステージ３の森とキャラ（仮）
 #if 0
 	CForest_Manager::GetInstance().Initialize();
 	CForest::GetInstance().Initialize();
@@ -33,11 +34,12 @@ void COpning::Initialize(void)
 //更新
 void COpning::Update(void)
 {
+	//ステージ３の森とキャラ（仮）
 #if 0
 	CForest::GetInstance().Update();
 	CProtagonist::GetInstance().Update();
 	CForest_Manager::GetInstance().Update();
-	CFog::GetInstance().GetInstance.Update;
+	CFog::GetInstance().Update();
 	CTimer::GetInstanse().Update();
 #endif
 	//キーボード用
@@ -55,6 +57,7 @@ void COpning::Update(void)
 
 void COpning::Draw(void)
 {
+	//ステージ３の森とキャラ（仮）
 #if 0
 	CForest::GetInstance().Draw();
 	CProtagonist::GetInstance().Draw();
