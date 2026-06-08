@@ -4,6 +4,7 @@
 #include"stage/stage_manager.h"
 #include"..\..\scene_manager.h"
 #include"..\save\save.h"
+
 //はじめからか続きからを選択
 //初めからの場合はプロローグ　続きからならセーブしているステージからスタート
 

@@ -3,13 +3,16 @@
 #include"../../../character/protagonist/protagonist.h"
 #include"../forest_manager.h"
 
+
+
+
 const int CForest::m_map_chip_size = 64;
 const int CForest::m_map_chip_count_width= vivid::WINDOW_WIDTH / m_map_chip_size;
 const int CForest::m_map_chip_count_height = vivid::WINDOW_HEIGHT / m_map_chip_size+1;
 
-constexpr int g_Width = 64;
-constexpr int g_Height=64;
-unsigned char m_Map[g_Height][g_Width];
+constexpr int width = 64;
+constexpr int height=64;
+unsigned char m_Map[height][width];
 
 
 CForest::CForest(void)
@@ -18,7 +21,7 @@ CForest::CForest(void)
 
 void CForest::Initialize(void)
 {
-	CForest_Manager::GetInstance().Initialize();
+	
 	for (int i = 0; i < m_map_chip_count_height; ++i)
 	{
 		for (int k = 0; k < m_map_chip_count_width; ++k)
@@ -52,7 +55,7 @@ void CForest::Initialize(void)
 	for (int i = 0, k = 0; i < size; ++i)
 	{
 		//文字の０～３であれば、数値に変換する
-		if (buf[i] >= '0' && buf[i] <= '6')
+		if (buf[i] >= '0' && buf[i] <= '7')
 		{
 			char t = buf[i];
 
@@ -71,40 +74,81 @@ void CForest::Initialize(void)
 void CForest::Update(void)
 {
 	namespace keyboard = vivid::keyboard;
+	namespace controller = vivid::controller;
+
+	// スティック入力取得
+	vivid::Vector2 stick = controller::GetAnalogStickLeft(controller::DEVICE_ID::PLAYER1);
+	const float DEAD_ZONE = 0.5f;
+
 	int x = (int)((CProtagonist::GetInstance().GetCharaPos().x + 0.5f) / (float)m_map_chip_size);
 	int y = (int)((CProtagonist::GetInstance().GetCharaPos().y + 0.5f) / (float)m_map_chip_size);
 
 
-	if (CheckChangeOver1(x, y) &&Button(vivid::keyboard::KEY_ID::W))
+	// ===== 上 =====
+	if (CheckChangeOver1(x, y) &&
+		(Button(keyboard::KEY_ID::W) || stick.y < -DEAD_ZONE))
 	{
 	}
 
-	if (CheckChangeOver2(x, y) && Button(vivid::keyboard::KEY_ID::D))
+	// ===== 右 =====
+	if (CheckChangeOver2(x, y) &&
+		(Button(keyboard::KEY_ID::D) || stick.x > DEAD_ZONE))
 	{
-		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST2);
+		if (CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST1)
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST2);
+
+		else if (CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST3)
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST4);
+
+		else if (CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST4)
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST5);
 	}
-	
-	if (CheckChangeOver3(x, y) && Button(vivid::keyboard::KEY_ID::S))
+
+	// ===== 下 =====
+	if (CheckChangeOver3(x, y) &&
+		(Button(keyboard::KEY_ID::S) || stick.y > DEAD_ZONE))
 	{
 		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST3);
 	}
-	if (CheckChangeOver4(x, y) && Button(vivid::keyboard::KEY_ID::A))
+
+	// ===== 左 =====
+	if (CheckChangeOver4(x, y) &&
+		(Button(keyboard::KEY_ID::A) || stick.x < -DEAD_ZONE))
 	{
 	}
 
+
+	// ===== 戻る処理 =====
 	if (CheckBack(x, y))
 	{
-		if( vivid::keyboard::Button(vivid::keyboard::KEY_ID::A))
-		CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST1);
-		else if( vivid::keyboard::Button(vivid::keyboard::KEY_ID::W))
+		if ((keyboard::Button(keyboard::KEY_ID::A) || stick.x < -DEAD_ZONE) &&
+			CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST2)
+		{
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST1);
+		}
+		else if ((keyboard::Button(keyboard::KEY_ID::A) || stick.x < -DEAD_ZONE) &&
+			CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST4)
+		{
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST3);
+		}
+		else if ((keyboard::Button(keyboard::KEY_ID::A) || stick.x < -DEAD_ZONE) &&
+			CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST5)
+		{
+			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST4);
+		}
+
+		if ((keyboard::Button(keyboard::KEY_ID::W) || stick.y < -DEAD_ZONE) &&
+			CForest_Manager::GetInstance().GetID() == FOREST_ID::FOREST3)
+		{
 			CForest_Manager::GetInstance().ChangeForest(FOREST_ID::FOREST2);
+		}
 	}
-	CForest_Manager::GetInstance().Update();
+
 }
 
 void CForest::Draw(void)
 {
-	vivid::DrawTexture("data//field.png", {0.0,0.0 });
+	vivid::DrawTexture("data\\field.png", {0.0,0.0 });
 
 	//要素数分繰り返す
 	for (int i = 0; i < m_map_chip_count_height; ++i)
@@ -129,7 +173,7 @@ void CForest::Draw(void)
 			vivid::DrawTexture("data\\map_chip.png", pos, 0xffffffff, rect);
 		}
 	}
-
+	
 	
 }
 
@@ -163,7 +207,7 @@ void CForest::Fopen(void)
 	for (int i = 0, k = 0; i < size; ++i)
 	{
 		//文字の０～4であれば、数値に変換する
-		if (buf[i] >= '0' && buf[i] <= '6')
+		if (buf[i] >= '0' && buf[i] <= '7')
 		{
 			char t = buf[i];
 
@@ -188,9 +232,9 @@ vivid::Vector2 CForest::GetBack()
 		{
 			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Back_Space)
 			{
-				return {
-					(float)(k * m_map_chip_size),
-					(float)(i * m_map_chip_size)
+				return { 
+					(float)(k*m_map_chip_size),
+					(float)(i*m_map_chip_size)
 				};
 			}
 		}
@@ -206,13 +250,14 @@ vivid::Vector2 CForest::GetChange1()
 			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over1)
 			{
 				return {
-					(float)(k * m_map_chip_size),
-					(float)(i * m_map_chip_size)
+					(float)(k * (m_map_chip_size )),
+					(float)(i * (m_map_chip_size ))
 				};
 			}
 		}
 	}
 }
+
 vivid::Vector2 CForest::GetChange2()
 {
 	for (int i = 0; i < m_map_chip_count_height; ++i)
@@ -222,8 +267,8 @@ vivid::Vector2 CForest::GetChange2()
 			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over2)
 			{
 				return {
-					(float)(k * m_map_chip_size),
-					(float)(i * m_map_chip_size)
+					(float)(k * (m_map_chip_size)),
+					(float)(i * (m_map_chip_size))
 				};
 			}
 		}
@@ -238,8 +283,8 @@ vivid::Vector2 CForest::GetChange3()
 			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over3)
 			{
 				return {
-					(float)(k * m_map_chip_size),
-					(float)(i * m_map_chip_size)
+					(float)(k * (m_map_chip_size )),
+					(float)(i * (m_map_chip_size ))
 				};
 			}
 		}
@@ -255,8 +300,8 @@ vivid::Vector2 CForest::GetChange4()
 			if (m_Map[i][k] == (unsigned char)MAP_CHIP_ID::Change_Over4)
 			{
 				return {
-					(float)(k * m_map_chip_size),
-					(float)(i * m_map_chip_size)
+					(float)(k * (m_map_chip_size )),
+					(float)(i * (m_map_chip_size ))
 				};
 			}
 		}
@@ -267,9 +312,6 @@ int CForest::GetMapChipSize(void)
 {
 	return m_map_chip_size;
 }
-
-
-
 
 
 
@@ -378,6 +420,24 @@ bool CForest::CheckChangeOver4(int x, int y)
 
 	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Change_Over4)
 	  return true;
+
+	return false;
+}
+
+bool CForest::CheckInvisivleWall(int x, int y)
+{
+	if (x < 0)
+		x = 0;
+	if (x > m_map_chip_count_width)
+		x = m_map_chip_count_width - 1;
+	if (y < 0)
+		y = 0;
+	if (y > m_map_chip_count_height)
+		y = m_map_chip_count_height - 1;
+
+
+	if (m_Map[y][x] == (unsigned char)MAP_CHIP_ID::Invisible_Wall)
+		return true;
 
 	return false;
 }

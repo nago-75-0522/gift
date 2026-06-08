@@ -1,5 +1,6 @@
 #pragma once
 #include "vivid.h"
+#include"../../map/forest_manager/forest/forest.h"
 /* 主人公 */
 
 
@@ -21,8 +22,11 @@ public:
 	void SetBackPosition();
 	void WaitCharacter();
 	void MoveCharacter();
+	void StopCharacter();
+	void Controller();
 	vivid::Vector2 GetCharaPos();
-	static CProtagonist& GetInstance();
+	static CProtagonist& GetInstance();	
+
 private:
 	CProtagonist(void);
 	//コピーコンストラクタ
@@ -32,6 +36,15 @@ private:
 
 	~CProtagonist(void) = default;
 
+	//定数
+	static const int m_chara_width;
+	static const int m_chara_height;
+	static const int m_chara_move_time;
+	static const float m_chara_move_speed;
+	static const vivid::Vector2 m_tree_size;
+	static const int m_yellow_nuts;
+
+	//変数
 	enum class CHARA_DIRECTION
 	{
 		DOWN,
@@ -47,19 +60,10 @@ private:
 		MOVE,
 	};
 	CHARA_STATE m_Chara_State;
-
-
-	//定数
-	static const int m_chara_width;
-	static const int m_chara_height;
-	static const int m_chara_move_time;
-	static const float m_chara_move_speed;
-
-	//変数
-	vivid::Vector2 m_Chara_Pos;
-	vivid::Rect m_Chara_Rect ;
-	vivid::Vector2 m_Chara_Speed;
-	int m_Chara_Anime_Frame ;
-	int m_Chara_Anime_Timer;
-	int m_Chara_Move_Timer;
+	vivid::Vector2 m_CharaPos;
+	vivid::Rect m_CharaRect ;
+	vivid::Vector2 m_CharaSpeed;
+	int m_CharaAnimeFrame ;
+	int m_CharaAnimeTimer;
+	int m_CharaMoveTimer;
 };
